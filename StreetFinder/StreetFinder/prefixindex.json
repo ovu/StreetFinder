@@ -1,0 +1,39 @@
+{
+   "settings" : {
+      "analysis" : {
+         "analyzer" : {
+            "street_search" : {
+               "tokenizer" : "whitespace",
+               "filter" : ["lowercase", "my_snowball"]
+            },
+            "street_index" : {
+               "tokenizer" : "whitespace",
+               "filter" : ["lowercase", "my_snowball"]
+            }
+         },
+		 "filter" : {
+			"my_snowball" : {
+				"type" : "snowball",
+				"language" : "German2"
+			}
+		 }
+      }
+   },
+   "mappings" : {
+      "street" : {
+         "properties" : {
+            "Name" : {
+               "type" : "string",
+			   "store" : "yes",
+               "search_analyzer" : "street_search",
+               "index_analyzer" : "street_index"
+            },
+			"Pobox" : {
+				"type" : "long",
+				"store" : "yes",
+				"index" : "analyzed"
+			}
+         }
+      }
+   }
+}

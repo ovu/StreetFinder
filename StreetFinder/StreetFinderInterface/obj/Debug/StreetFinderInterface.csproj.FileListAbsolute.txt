@@ -1,0 +1,4 @@
+c:\Projects\SearchAddress\StreetFinder\StreetFinderInterface\bin\Debug\StreetFinderInterface.dll
+c:\Projects\SearchAddress\StreetFinder\StreetFinderInterface\bin\Debug\StreetFinderInterface.pdb
+c:\Projects\SearchAddress\StreetFinder\StreetFinderInterface\obj\Debug\StreetFinderInterface.dll
+c:\Projects\SearchAddress\StreetFinder\StreetFinderInterface\obj\Debug\StreetFinderInterface.pdb

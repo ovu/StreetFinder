@@ -1,0 +1,13 @@
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\StreetFinder.dll
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\StreetFinder.pdb
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\ApproximativeSearch.dll
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\PlainElastic.Net.dll
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\PlainElastic.Net.pdb
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\obj\Debug\StreetFinder.csprojResolveAssemblyReference.cache
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\obj\Debug\StreetFinder.dll
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\obj\Debug\StreetFinder.pdb
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\Newtonsoft.Json.dll
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\Newtonsoft.Json.pdb
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\Newtonsoft.Json.xml
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\StreetFinderInterface.dll
+c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\StreetFinderInterface.pdb

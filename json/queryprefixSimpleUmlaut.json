@@ -1,0 +1,22 @@
+{
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "prefix": {
+                        "Name": {
+                            "prefix": "Saarbr"
+                        }
+                    }
+                },
+                {
+                    "term": {
+                        "Pobox": {
+                            "value": "86161"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
