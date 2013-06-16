@@ -87,6 +87,41 @@ Scenario: Search an street using the prefix of the street name when the searched
 	| name              | pobox |
 	| S-Bahnhof Isartor | 86161 |
 
+Scenario: Search an street using the prefix of the street name when the searched street name has more than one space at the beginning
+	Given the user enters the street "    Isar"  with the pobox "86161"
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name              | pobox |
+	| S-Bahnhof Isartor | 86161 |
+
+Scenario: Search an street using the prefix of the street name when the searched street name has a minus at the end
+	Given the user enters the street "Isar-"  with the pobox "86161"
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name              | pobox |
+	| S-Bahnhof Isartor | 86161 |
+
+Scenario: Search an street using the prefix of the street name when the searched street name has a minus at the beginning
+	Given the user enters the street "-Isar"  with the pobox "86161"
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name              | pobox |
+	| S-Bahnhof Isartor | 86161 |
+
+Scenario: Search an street using the prefix of the street name when the searched street name has several minus
+	Given the user enters the street "Bahn-----Isar"  with the pobox "86161"
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name              | pobox |
+	| S-Bahnhof Isartor | 86161 |
+
+Scenario: Search an street using the prefix of the street name when the searched street name has several minus and spaces
+	Given the user enters the street "Bahn-- -- -Isar"  with the pobox "86161"
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name              | pobox |
+	| S-Bahnhof Isartor | 86161 |
+
 Scenario: Search an street that matches with the prefix of a given street name with umlaut
 	Given in the repository is stored the street
 	| name				  | pobox |

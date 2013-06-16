@@ -366,43 +366,183 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search an street that matches with the prefix of a given street name with umlaut")]
-        public virtual void SearchAnStreetThatMatchesWithThePrefixOfAGivenStreetNameWithUmlaut()
+        [NUnit.Framework.DescriptionAttribute("Search an street using the prefix of the street name when the searched street nam" +
+            "e has more than one space at the beginning")]
+        public virtual void SearchAnStreetUsingThePrefixOfTheStreetNameWhenTheSearchedStreetNameHasMoreThanOneSpaceAtTheBeginning()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street that matches with the prefix of a given street name with umlaut", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street using the prefix of the street name when the searched street nam" +
+                    "e has more than one space at the beginning", ((string[])(null)));
 #line 90
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
+#line 91
+ testRunner.Given("the user enters the street \"    Isar\"  with the pobox \"86161\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 92
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
                         "pobox"});
             table19.AddRow(new string[] {
-                        "Saarbrücker",
+                        "S-Bahnhof Isartor",
                         "86161"});
-#line 91
- testRunner.Given("in the repository is stored the street", ((string)(null)), table19, "Given ");
+#line 93
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table19, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search an street using the prefix of the street name when the searched street nam" +
+            "e has a minus at the end")]
+        public virtual void SearchAnStreetUsingThePrefixOfTheStreetNameWhenTheSearchedStreetNameHasAMinusAtTheEnd()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street using the prefix of the street name when the searched street nam" +
+                    "e has a minus at the end", ((string[])(null)));
+#line 97
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line 98
+ testRunner.Given("the user enters the street \"Isar-\"  with the pobox \"86161\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 99
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
                         "pobox"});
             table20.AddRow(new string[] {
-                        "saarbrü",
+                        "S-Bahnhof Isartor",
                         "86161"});
-#line 94
- testRunner.And("the user enters the following street", ((string)(null)), table20, "And ");
-#line 97
+#line 100
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table20, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search an street using the prefix of the street name when the searched street nam" +
+            "e has a minus at the beginning")]
+        public virtual void SearchAnStreetUsingThePrefixOfTheStreetNameWhenTheSearchedStreetNameHasAMinusAtTheBeginning()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street using the prefix of the street name when the searched street nam" +
+                    "e has a minus at the beginning", ((string[])(null)));
+#line 104
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line 105
+ testRunner.Given("the user enters the street \"-Isar\"  with the pobox \"86161\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 106
  testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
                         "pobox"});
             table21.AddRow(new string[] {
+                        "S-Bahnhof Isartor",
+                        "86161"});
+#line 107
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table21, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search an street using the prefix of the street name when the searched street nam" +
+            "e has several minus")]
+        public virtual void SearchAnStreetUsingThePrefixOfTheStreetNameWhenTheSearchedStreetNameHasSeveralMinus()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street using the prefix of the street name when the searched street nam" +
+                    "e has several minus", ((string[])(null)));
+#line 111
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line 112
+ testRunner.Given("the user enters the street \"Bahn-----Isar\"  with the pobox \"86161\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 113
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table22.AddRow(new string[] {
+                        "S-Bahnhof Isartor",
+                        "86161"});
+#line 114
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table22, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search an street using the prefix of the street name when the searched street nam" +
+            "e has several minus and spaces")]
+        public virtual void SearchAnStreetUsingThePrefixOfTheStreetNameWhenTheSearchedStreetNameHasSeveralMinusAndSpaces()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street using the prefix of the street name when the searched street nam" +
+                    "e has several minus and spaces", ((string[])(null)));
+#line 118
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line 119
+ testRunner.Given("the user enters the street \"Bahn-- -- -Isar\"  with the pobox \"86161\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 120
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table23.AddRow(new string[] {
+                        "S-Bahnhof Isartor",
+                        "86161"});
+#line 121
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table23, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search an street that matches with the prefix of a given street name with umlaut")]
+        public virtual void SearchAnStreetThatMatchesWithThePrefixOfAGivenStreetNameWithUmlaut()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street that matches with the prefix of a given street name with umlaut", ((string[])(null)));
+#line 125
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table24.AddRow(new string[] {
                         "Saarbrücker",
                         "86161"});
-#line 98
- testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table21, "Then ");
+#line 126
+ testRunner.Given("in the repository is stored the street", ((string)(null)), table24, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table25.AddRow(new string[] {
+                        "saarbrü",
+                        "86161"});
+#line 129
+ testRunner.And("the user enters the following street", ((string)(null)), table25, "And ");
+#line 132
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table26.AddRow(new string[] {
+                        "Saarbrücker",
+                        "86161"});
+#line 133
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table26, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

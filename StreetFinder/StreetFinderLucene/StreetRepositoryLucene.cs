@@ -67,11 +67,12 @@ namespace StreetFinderLucene
 
         private string GetQueryForStreetName(string streetName, string queryOperator)
         {
-            var streetNameWithOneSpace = Regex.Replace(streetName, @"\s+", " ");
+            var streetNameTrimmed = streetName.Trim('-', ' ');
+            var streetNameWithoutMinus = streetNameTrimmed.Replace('-', ' ');
+            var streetNameWithOneSpace = Regex.Replace(streetNameWithoutMinus, @"\s+", " ");
 
-            var streetNameTokens = streetNameWithOneSpace.Trim()
-                                             .Replace('-', ' ')
-                                             .Split(' ');
+            var streetNameTokens = streetNameWithOneSpace.Replace('-', ' ').Split(' ');
+
             var result = "";
             foreach (var streetNameToken in streetNameTokens)
             {
