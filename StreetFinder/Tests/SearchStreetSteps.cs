@@ -52,6 +52,14 @@ namespace Tests
             }
         }
 
+        [Given(@"the user enters the street ""(.*)""  with the pobox ""(.*)""")]
+        public void GivenTheUserEntersTheStreetWithThePobox(string streetName, int pobox)
+        {
+            var streetToBeSearch = new Street { Name = streetName, Pobox = pobox };
+
+            ScenarioContext.Current.Add("StreetToBeSearch", streetToBeSearch);
+        }
+
         [When(@"the portal search for streets")]
         public void WhenThePortalSearchForStreets()
         {

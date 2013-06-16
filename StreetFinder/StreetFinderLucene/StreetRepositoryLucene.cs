@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
@@ -66,7 +67,10 @@ namespace StreetFinderLucene
 
         private string GetQueryForStreetName(string streetName, string queryOperator)
         {
-            var streetNameTokens = streetName.Replace('-', ' ')
+            var streetNameWithOneSpace = Regex.Replace(streetName, @"\s+", " ");
+
+            var streetNameTokens = streetNameWithOneSpace.Trim()
+                                             .Replace('-', ' ')
                                              .Split(' ');
             var result = "";
             foreach (var streetNameToken in streetNameTokens)
