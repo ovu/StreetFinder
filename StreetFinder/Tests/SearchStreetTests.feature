@@ -44,6 +44,32 @@ Scenario: Search an street that matches with the prefix of a given street name
 	| name              | pobox |
 	| S-Bahnhof Isartor | 86161 |
 
+Scenario: Search an street using the prefix of the name of the street when the street is compound
+	Given the user enters the following street
+	| name | pobox |
+	| bahn isar | 86161 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name              | pobox |
+	| S-Bahnhof Isartor | 86161 |
+
+Scenario: Search an street using the prefix of the name of the street when the street is compound case Insensitive
+	Given the user enters the following street
+	| name | pobox |
+	| Bahn Isar | 86161 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name              | pobox |
+	| S-Bahnhof Isartor | 86161 |
+
+Scenario: Search an street using the prefix of the street name when the street is compound and searching in a different word position
+	Given the user enters the following street
+	| name | pobox |
+	| Isar Bahn| 86161 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name              | pobox |
+	| S-Bahnhof Isartor | 86161 |
 
 Scenario: Search an street that matches with the prefix of a given street name with umlaut
 	Given in the repository is stored the street

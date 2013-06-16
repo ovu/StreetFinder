@@ -56,6 +56,29 @@ namespace StreetFinderLucene
         {
             var directory = FSDirectory.Open(new DirectoryInfo(StreetsIndexDirectory));
 
+            foreach (var street in SearchStreetInIndex(zipCode, streetName, directory)) yield return street;
+
+            var ngramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+
+            foreach (var street in SearchStreetInIndex(zipCode, streetName, ngramDirectory)) yield return street;
+
+        }
+
+        private string GetQueryForStreetName(string streetName, string queryOperator)
+        {
+            var streetNameTokens = streetName.Replace('-', ' ')
+                                             .Split(' ');
+            var result = "";
+            foreach (var streetNameToken in streetNameTokens)
+            {
+                result += string.Format("+Name:{0}{1} ", streetNameToken, queryOperator);
+            }
+
+            return result;
+        }
+
+        private IEnumerable<Street> SearchStreetInIndex(int zipCode, string streetName, FSDirectory directory)
+        {
             IndexReader indexReader = IndexReader.Open(directory, true);
 
             Searcher indexSearch = new IndexSearcher(indexReader);
@@ -76,15 +99,17 @@ namespace StreetFinderLucene
             var foundIds = new List<string>();
 
             foreach (var hit in hits)
-            {               
+            {
                 var documentFromSearcher = indexSearch.Doc(hit.Doc);
                 foundIds.Add(documentFromSearcher.Get("Id"));
 
-                yield return new Street {Name = documentFromSearcher.Get("Name"), Pobox = int.Parse(documentFromSearcher.Get("Pobox"))};
+                yield return
+                    new Street {Name = documentFromSearcher.Get("Name"), Pobox = int.Parse(documentFromSearcher.Get("Pobox"))};
             }
 
             // Search with Query parser
-            var query = queryParser.Parse(string.Format("Name:{0} AND Pobox:{1}", streetName, zipCode));
+            var streetNameQuery = GetQueryForStreetName(streetName, "*");
+            var query = queryParser.Parse(string.Format("{0} AND Pobox:{1}", streetNameQuery, zipCode));
 
             resultDocs = indexSearch.Search(query, 5);
             hits = resultDocs.ScoreDocs;
@@ -94,14 +119,18 @@ namespace StreetFinderLucene
                 var documentFromSearcher = indexSearch.Doc(hit.Doc);
                 if (!foundIds.Contains(documentFromSearcher.Get("Id")))
                 {
-                    yield return new Street { Name = documentFromSearcher.Get("Name"), Pobox = int.Parse(documentFromSearcher.Get("Pobox")) };
+                    yield return
+                        new Street
+                            {
+                                Name = documentFromSearcher.Get("Name"),
+                                Pobox = int.Parse(documentFromSearcher.Get("Pobox"))
+                            };
                 }
             }
 
             indexSearch.Dispose();
 
             directory.Dispose();
-
         }
 
         public void InsertStreet(Street street)
