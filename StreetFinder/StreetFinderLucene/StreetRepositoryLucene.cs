@@ -84,7 +84,7 @@ namespace StreetFinderLucene
             }
 
             // Search with Query parser
-            var query = queryParser.Parse(streetName);
+            var query = queryParser.Parse(string.Format("Name:{0} AND Pobox:{1}", streetName, zipCode));
 
             resultDocs = indexSearch.Search(query, 5);
             hits = resultDocs.ScoreDocs;

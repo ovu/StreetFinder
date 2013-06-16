@@ -73,5 +73,18 @@ namespace Tests
                             .Contain(s => s.Name.Equals(streetToBeFound.Name) && s.Pobox.Equals(streetToBeFound.Pobox));
             }
         }
+
+        [Then(@"the user should not have the following autocomplete suggestions")]
+        public void ThenTheUserShouldNotHaveTheFollowingAutocompleteSuggestions(Table table)
+        {
+            var searchResult = ScenarioContext.Current.Get<IEnumerable<Street>>("SearchResult");
+            var searchResultList = searchResult.ToList();
+            foreach (var row in table.Rows)
+            {
+                var streetToBeFound = new Street { Name = row["name"], Pobox = int.Parse(row["pobox"]) };
+
+                searchResultList.Should().NotContain(s => s.Name.Equals(streetToBeFound.Name) && s.Pobox.Equals(streetToBeFound.Pobox));
+            }
+        }
     }
 }

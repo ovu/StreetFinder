@@ -114,11 +114,11 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search an street that matches with the prefix of a given street name")]
-        public virtual void SearchAnStreetThatMatchesWithThePrefixOfAGivenStreetName()
+        [NUnit.Framework.DescriptionAttribute("Search an new street, similar to an existing one but with different Pobox")]
+        public virtual void SearchAnNewStreetSimilarToAnExistingOneButWithDifferentPobox()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street that matches with the prefix of a given street name", ((string[])(null)));
-#line 23
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an new street, similar to an existing one but with different Pobox", ((string[])(null)));
+#line 21
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
@@ -127,21 +127,72 @@ this.FeatureBackground();
                         "name",
                         "pobox"});
             table4.AddRow(new string[] {
-                        "isar",
-                        "86161"});
-#line 24
- testRunner.Given("the user enters the following street", ((string)(null)), table4, "Given ");
-#line 27
- testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                        "Bahnhof",
+                        "123"});
+#line 22
+ testRunner.Given("in the repository is stored the street", ((string)(null)), table4, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
                         "pobox"});
             table5.AddRow(new string[] {
+                        "Bahnhof",
+                        "123"});
+#line 25
+  testRunner.And("the user enters the following street", ((string)(null)), table5, "And ");
+#line 28
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table6.AddRow(new string[] {
+                        "Bahnhof",
+                        "123"});
+#line 29
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table6, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table7.AddRow(new string[] {
                         "S-Bahnhof Isartor",
                         "86161"});
-#line 28
- testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table5, "Then ");
+#line 32
+  testRunner.And("the user should not have the following autocomplete suggestions", ((string)(null)), table7, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search an street that matches with the prefix of a given street name")]
+        public virtual void SearchAnStreetThatMatchesWithThePrefixOfAGivenStreetName()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street that matches with the prefix of a given street name", ((string[])(null)));
+#line 38
+this.ScenarioSetup(scenarioInfo);
+#line 6
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table8.AddRow(new string[] {
+                        "isar",
+                        "86161"});
+#line 39
+ testRunner.Given("the user enters the following street", ((string)(null)), table8, "Given ");
+#line 42
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table9.AddRow(new string[] {
+                        "S-Bahnhof Isartor",
+                        "86161"});
+#line 43
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table9, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -151,39 +202,39 @@ this.FeatureBackground();
         public virtual void SearchAnStreetThatMatchesWithThePrefixOfAGivenStreetNameWithUmlaut()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street that matches with the prefix of a given street name with umlaut", ((string[])(null)));
-#line 33
+#line 48
 this.ScenarioSetup(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
                         "pobox"});
-            table6.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "Saarbrücker",
                         "86161"});
-#line 34
- testRunner.Given("in the repository is stored the street", ((string)(null)), table6, "Given ");
+#line 49
+ testRunner.Given("in the repository is stored the street", ((string)(null)), table10, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
                         "pobox"});
-            table7.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "saarbrü",
                         "86161"});
-#line 37
- testRunner.And("the user enters the following street", ((string)(null)), table7, "And ");
-#line 40
+#line 52
+ testRunner.And("the user enters the following street", ((string)(null)), table11, "And ");
+#line 55
  testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
                         "pobox"});
-            table8.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "Saarbrücker",
                         "86161"});
-#line 41
- testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table8, "Then ");
+#line 56
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table12, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
