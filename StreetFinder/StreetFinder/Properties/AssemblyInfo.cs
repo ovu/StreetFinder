@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("StreetFinder")]
+[assembly: AssemblyTitle("StreetFinderLucene")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("StreetFinder")]
+[assembly: AssemblyProduct("StreetFinderLucene")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9c95c133-3780-4b4c-87f9-98d142e08bb6")]
+[assembly: Guid("bc7d5d4d-f110-4311-8122-f8c0600220b8")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -69,7 +69,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StreetFinderLucene\StreetFinder.csproj">
+    <ProjectReference Include="..\StreetFinder\StreetFinder.csproj">
       <Project>{7218934a-87b3-4114-a3c8-3cce1d86159c}</Project>
       <Name>StreetFinder</Name>
     </ProjectReference>

@@ -1,9 +1,0 @@
-c:\Projects\SearchAddress\StreetFinder\StreetFinderInterface\bin\Debug\StreetFinderInterface.dll
-c:\Projects\SearchAddress\StreetFinder\StreetFinderInterface\bin\Debug\StreetFinderInterface.pdb
-c:\Projects\SearchAddress\StreetFinder\StreetFinderInterface\obj\Debug\StreetFinderInterface.dll
-c:\Projects\SearchAddress\StreetFinder\StreetFinderInterface\obj\Debug\StreetFinderInterface.pdb
-c:\Github\StreetFinder\StreetFinder\StreetFinderInterface\bin\Debug\StreetFinderInterface.dll
-c:\Github\StreetFinder\StreetFinder\StreetFinderInterface\bin\Debug\StreetFinderInterface.pdb
-c:\Github\StreetFinder\StreetFinder\StreetFinderInterface\obj\Debug\StreetFinderInterface.csprojResolveAssemblyReference.cache
-c:\Github\StreetFinder\StreetFinder\StreetFinderInterface\obj\Debug\StreetFinderInterface.dll
-c:\Github\StreetFinder\StreetFinder\StreetFinderInterface\obj\Debug\StreetFinderInterface.pdb

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{121D3126-D680-4C0A-93BA-0A02BBF6582C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFinder", "StreetFinderLucene\StreetFinder.csproj", "{7218934A-87B3-4114-A3C8-3CCE1D86159C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFinder", "StreetFinder\StreetFinder.csproj", "{7218934A-87B3-4114-A3C8-3CCE1D86159C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
