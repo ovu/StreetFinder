@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFinder", "StreetFinder\StreetFinder.csproj", "{0BA922B6-9705-48BE-809F-14E8026C67F2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{121D3126-D680-4C0A-93BA-0A02BBF6582C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFinderLucene", "StreetFinderLucene\StreetFinderLucene.csproj", "{7218934A-87B3-4114-A3C8-3CCE1D86159C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFinderInterface", "StreetFinderInterface\StreetFinderInterface.csproj", "{64A718CA-C6A6-45D9-8718-8BDC150DA87A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetFinder", "StreetFinderLucene\StreetFinder.csproj", "{7218934A-87B3-4114-A3C8-3CCE1D86159C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0BA922B6-9705-48BE-809F-14E8026C67F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BA922B6-9705-48BE-809F-14E8026C67F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BA922B6-9705-48BE-809F-14E8026C67F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BA922B6-9705-48BE-809F-14E8026C67F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{121D3126-D680-4C0A-93BA-0A02BBF6582C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{121D3126-D680-4C0A-93BA-0A02BBF6582C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{121D3126-D680-4C0A-93BA-0A02BBF6582C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,10 +19,6 @@ Global
 		{7218934A-87B3-4114-A3C8-3CCE1D86159C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7218934A-87B3-4114-A3C8-3CCE1D86159C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7218934A-87B3-4114-A3C8-3CCE1D86159C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64A718CA-C6A6-45D9-8718-8BDC150DA87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64A718CA-C6A6-45D9-8718-8BDC150DA87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64A718CA-C6A6-45D9-8718-8BDC150DA87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64A718CA-C6A6-45D9-8718-8BDC150DA87A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

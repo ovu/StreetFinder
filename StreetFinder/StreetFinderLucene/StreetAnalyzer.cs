@@ -4,7 +4,7 @@ using Lucene.Net.Analysis.NGram;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Util;
 
-namespace StreetFinderLucene
+namespace StreetFinder
 {
     public class StreetAnalyzer: Analyzer
     {

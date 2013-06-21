@@ -11,3 +11,16 @@ c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\Newtonsoft.Json.pd
 c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\Newtonsoft.Json.xml
 c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\StreetFinderInterface.dll
 c:\Projects\SearchAddress\StreetFinder\StreetFinder\bin\Debug\StreetFinderInterface.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\StreetFinder.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\StreetFinder.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\ApproximativeSearch.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\Newtonsoft.Json.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\PlainElastic.Net.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\StreetFinderInterface.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\StreetFinderInterface.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\Newtonsoft.Json.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\Newtonsoft.Json.xml
+c:\Github\StreetFinder\StreetFinder\StreetFinder\bin\Debug\PlainElastic.Net.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinder\obj\Debug\StreetFinder.csprojResolveAssemblyReference.cache
+c:\Github\StreetFinder\StreetFinder\StreetFinder\obj\Debug\StreetFinder.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinder\obj\Debug\StreetFinder.pdb

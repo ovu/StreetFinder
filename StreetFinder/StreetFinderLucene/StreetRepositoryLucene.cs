@@ -10,11 +10,10 @@ using Lucene.Net.Index;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
-using StreetFinderInterface;
 using Directory = System.IO.Directory;
 using Version = Lucene.Net.Util.Version;
 
-namespace StreetFinderLucene
+namespace StreetFinder
 {
     public class StreetRepositoryLucene: IStreetSearchRepository
     {
@@ -92,32 +91,14 @@ namespace StreetFinderLucene
 
             var queryParser = new QueryParser(Version.LUCENE_30, "Name", analyzer);
 
-            var booleanQuery = new BooleanQuery();
-            booleanQuery.Add(new TermQuery(new Term("Pobox", zipCode.ToString(CultureInfo.InvariantCulture))), Occur.MUST);
-
-            booleanQuery.Add(new PrefixQuery(new Term("Name", streetName)), Occur.MUST);
-
-            TopDocs resultDocs = indexSearch.Search(booleanQuery, 5);
-
-            var hits = resultDocs.ScoreDocs;
-
             var foundIds = new List<string>();
-
-            foreach (var hit in hits)
-            {
-                var documentFromSearcher = indexSearch.Doc(hit.Doc);
-                foundIds.Add(documentFromSearcher.Get("Id"));
-
-                yield return
-                    new Street {Name = documentFromSearcher.Get("Name"), Pobox = int.Parse(documentFromSearcher.Get("Pobox"))};
-            }
 
             // Search with Query parser
             var streetNameQuery = GetQueryForStreetName(streetName, "*");
             var query = queryParser.Parse(string.Format("{0} AND Pobox:{1}", streetNameQuery, zipCode));
 
-            resultDocs = indexSearch.Search(query, 5);
-            hits = resultDocs.ScoreDocs;
+            var resultDocs = indexSearch.Search(query, 5);
+            var hits = resultDocs.ScoreDocs;
 
             foreach (var hit in hits)
             {
@@ -147,30 +128,26 @@ namespace StreetFinderLucene
 
             var directory = FSDirectory.Open(new DirectoryInfo(StreetsIndexDirectory));
             Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
-            
-            var writer = new IndexWriter(directory, analyzer, true, IndexWriter.MaxFieldLength.LIMITED);
 
-            writer.AddDocument(streetDocument);
-
-            writer.Optimize();
-
-            writer.Commit();
-
-            writer.Dispose(true);
+            WriteInIndex(streetDocument, directory, analyzer);
 
             // Write edgegram
             var edgeDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
             var streetEdgeGramAnalyzer = new StreetAnalyzer();
+            WriteInIndex(streetDocument, edgeDirectory, streetEdgeGramAnalyzer);
+        }
 
-            var edgeGramWriter = new IndexWriter(edgeDirectory, streetEdgeGramAnalyzer, true, IndexWriter.MaxFieldLength.LIMITED);
+        private void WriteInIndex(Document streetDocument, FSDirectory directory, Analyzer analyzer)
+        {
+            var indexWriter = new IndexWriter(directory, analyzer, true, IndexWriter.MaxFieldLength.LIMITED);
 
-            edgeGramWriter.AddDocument(streetDocument);
+            indexWriter.AddDocument(streetDocument);
 
-            edgeGramWriter.Optimize();
+            indexWriter.Optimize();
 
-            edgeGramWriter.Commit();
+            indexWriter.Commit();
 
-            edgeGramWriter.Dispose(true);
+            indexWriter.Dispose(true);
         }
 
         public void InsertStreets(IList<Street> streets)

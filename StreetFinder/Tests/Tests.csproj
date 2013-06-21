@@ -69,16 +69,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StreetFinderInterface\StreetFinderInterface.csproj">
-      <Project>{64A718CA-C6A6-45D9-8718-8BDC150DA87A}</Project>
-      <Name>StreetFinderInterface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StreetFinderLucene\StreetFinderLucene.csproj">
+    <ProjectReference Include="..\StreetFinderLucene\StreetFinder.csproj">
       <Project>{7218934a-87b3-4114-a3c8-3cce1d86159c}</Project>
-      <Name>StreetFinderLucene</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StreetFinder\StreetFinder.csproj">
-      <Project>{0ba922b6-9705-48be-809f-14e8026c67f2}</Project>
       <Name>StreetFinder</Name>
     </ProjectReference>
   </ItemGroup>

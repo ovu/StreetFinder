@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Lucene.Net.Index;
 using Lucene.Net.Search;
 
-namespace StreetFinderLucene
+namespace StreetFinder
 {
     public class StreetFilter: Filter
     {

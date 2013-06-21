@@ -2,8 +2,7 @@
 using System.Linq;
 using System.Threading;
 using FluentAssertions;
-using StreetFinderInterface;
-using StreetFinderLucene;
+using StreetFinder;
 using TechTalk.SpecFlow;
 
 namespace Tests

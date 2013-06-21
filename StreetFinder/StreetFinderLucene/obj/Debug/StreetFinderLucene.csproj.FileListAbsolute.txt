@@ -20,3 +20,12 @@ c:\StreetFinder\StreetFinder\StreetFinder\StreetFinderLucene\bin\Debug\Lucene.Ne
 c:\StreetFinder\StreetFinder\StreetFinder\StreetFinderLucene\obj\Debug\StreetFinderLucene.csprojResolveAssemblyReference.cache
 c:\StreetFinder\StreetFinder\StreetFinder\StreetFinderLucene\obj\Debug\StreetFinderLucene.dll
 c:\StreetFinder\StreetFinder\StreetFinder\StreetFinderLucene\obj\Debug\StreetFinderLucene.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\bin\Debug\StreetFinderLucene.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\bin\Debug\StreetFinderLucene.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\bin\Debug\Lucene.Net.Contrib.Analyzers.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\bin\Debug\Lucene.Net.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\bin\Debug\Lucene.Net.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\bin\Debug\Lucene.Net.Contrib.Analyzers.pdb
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\obj\Debug\StreetFinderLucene.csprojResolveAssemblyReference.cache
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\obj\Debug\StreetFinderLucene.dll
+c:\Github\StreetFinder\StreetFinder\StreetFinderLucene\obj\Debug\StreetFinderLucene.pdb

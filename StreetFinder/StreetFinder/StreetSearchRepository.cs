@@ -7,7 +7,6 @@ using PlainElastic.Net;
 using PlainElastic.Net.Mappings;
 using PlainElastic.Net.Queries;
 using PlainElastic.Net.Serialization;
-using StreetFinderInterface;
 
 namespace StreetFinder
 {
