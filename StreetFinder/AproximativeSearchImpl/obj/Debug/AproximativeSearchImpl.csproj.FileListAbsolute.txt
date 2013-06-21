@@ -1,8 +1,5 @@
 C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\AproximativeSearchImpl.dll
 C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\AproximativeSearchImpl.pdb
-C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\obj\Debug\AproximativeSearchImpl.csprojResolveAssemblyReference.cache
-C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\obj\Debug\AproximativeSearchImpl.dll
-C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\obj\Debug\AproximativeSearchImpl.pdb
 C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\ApproximativeSearch.dll
 C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\StreetFinder.dll
 C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\Lucene.Net.dll
@@ -10,3 +7,6 @@ C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\Lucene.Net.
 C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\StreetFinder.pdb
 C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\Lucene.Net.pdb
 C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\bin\Debug\Lucene.Net.Contrib.Analyzers.pdb
+C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\obj\Debug\AproximativeSearchImpl.csprojResolveAssemblyReference.cache
+C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\obj\Debug\AproximativeSearchImpl.dll
+C:\Github\StreetFinder\StreetFinder\AproximativeSearchImpl\obj\Debug\AproximativeSearchImpl.pdb
