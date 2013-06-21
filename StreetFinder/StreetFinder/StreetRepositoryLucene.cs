@@ -44,12 +44,13 @@ namespace StreetFinder
 
         public bool ExistStreetRepository()
         {
-            return Directory.Exists(StreetsIndexDirectory);
+            return Directory.Exists(StreetsIndexDirectory) && Directory.Exists(StreetsEdgeGramIndexDirectory);
         }
 
         public void DeleteStreetRepository()
         {
             Directory.Delete(StreetsIndexDirectory, true);
+            Directory.Delete(StreetsEdgeGramIndexDirectory, true);
         }
 
         public IEnumerable<Street> SearchForStreets(string zipCode, string streetName)

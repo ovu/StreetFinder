@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ApproximativeSearch;
 using StreetFinder;
 
@@ -7,7 +8,7 @@ namespace AproximativeSearchImpl
 {
     public class AddressService: IAddressService
     {
-        private StreetRepositoryLucene streetRepository;
+        private readonly StreetRepositoryLucene streetRepository;
 
         public AddressService()
         {
@@ -16,22 +17,43 @@ namespace AproximativeSearchImpl
 
         public IEnumerable<string> Search(string zip, string street)
         {
-            throw new NotImplementedException();
+            var searchResults = streetRepository.SearchForStreets(zip, street);
+
+            return searchResults.Select(searchResult => searchResult.Name);
         }
 
-        public void Insert(string zip, ISet<string> streets)
+        public void Insert(string zip, ISet<string> streetNames)
         {
-            throw new NotImplementedException();
+            foreach (var streetName in streetNames)
+            {
+                Insert(zip, streetName);
+            }
         }
 
         public void Insert(string zip, string streetName)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(zip))
+            {
+                throw new ArgumentException("The parameter zip cannot be null nor empty");
+            }
+
+            if (string.IsNullOrEmpty(streetName))
+            {
+                throw new ArgumentException("The parameter streetname cannot be null nor empty");
+            }
+
+            var street = new Street {Name = streetName, Pobox = zip};
+
+            if (!streetRepository.ExistStreetRepository())
+            {
+                streetRepository.CreateStreetRepository();
+            }
+
+            streetRepository.InsertStreet(street);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }
