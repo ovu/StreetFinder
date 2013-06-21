@@ -34,7 +34,7 @@ namespace Tests
         {
             foreach (var row in table.Rows)
             {
-                var street = new Street {Name = row["name"], Pobox = int.Parse(row["pobox"])};
+                var street = new Street {Name = row["name"], Pobox = row["pobox"]};
 
                 repository.InsertStreet(street);
             }
@@ -45,14 +45,14 @@ namespace Tests
         {
             foreach (var row in table.Rows)
             {
-                var streetToBeSearch = new Street { Name = row["name"], Pobox = int.Parse(row["pobox"]) };
+                var streetToBeSearch = new Street { Name = row["name"], Pobox = row["pobox"] };
 
                 ScenarioContext.Current.Add("StreetToBeSearch", streetToBeSearch);
             }
         }
 
         [Given(@"the user enters the street ""(.*)""  with the pobox ""(.*)""")]
-        public void GivenTheUserEntersTheStreetWithThePobox(string streetName, int pobox)
+        public void GivenTheUserEntersTheStreetWithThePobox(string streetName, string pobox)
         {
             var streetToBeSearch = new Street { Name = streetName, Pobox = pobox };
 
@@ -74,7 +74,7 @@ namespace Tests
             var searchResultList = searchResult.ToList();
             foreach (var row in table.Rows)
             {
-                var streetToBeFound = new Street {Name = row["name"], Pobox = int.Parse(row["pobox"])};
+                var streetToBeFound = new Street {Name = row["name"], Pobox = row["pobox"]};
 
                 searchResultList.Should()
                             .Contain(s => s.Name.Equals(streetToBeFound.Name) && s.Pobox.Equals(streetToBeFound.Pobox));
@@ -88,7 +88,7 @@ namespace Tests
             var searchResultList = searchResult.ToList();
             foreach (var row in table.Rows)
             {
-                var streetToBeFound = new Street { Name = row["name"], Pobox = int.Parse(row["pobox"]) };
+                var streetToBeFound = new Street { Name = row["name"], Pobox = row["pobox"] };
 
                 searchResultList.Should().NotContain(s => s.Name.Equals(streetToBeFound.Name) && s.Pobox.Equals(streetToBeFound.Pobox));
             }

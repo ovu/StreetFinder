@@ -10,7 +10,7 @@ namespace StreetFinder
 
         void DeleteStreetRepository();
 
-        IEnumerable<Street> SearchForStreets(int zipCode, string streetName);
+        IEnumerable<Street> SearchForStreets(string zipCode, string streetName);
 
         void InsertStreet(Street street);
 

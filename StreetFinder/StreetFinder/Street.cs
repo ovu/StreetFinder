@@ -4,6 +4,6 @@ namespace StreetFinder
     {
         public string Name { get; set; }
 
-        public int Pobox { get; set; }
+        public string Pobox { get; set; }
     }
 }

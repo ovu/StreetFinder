@@ -9,6 +9,7 @@ Background:
 	| S-Bahnhof Isartor | 86161 |
 
 # Term Search
+
 Scenario: Search an street that matches with the term of a given street name
 	Given the user enters the following street
 	| name | pobox |
@@ -133,3 +134,17 @@ Scenario: Search an street that matches with the prefix of a given street name w
 	Then the user should have the following autocomplete suggestions
 	| name                | pobox |
 	| Saarbrücker | 86161 |
+
+# Pobox Validations
+
+Scenario: Search an street when the Pobox starts with 0
+	Given in the repository is stored the street
+	| name		     | pobox |
+	| Street pobox 0 | 06161 |
+	And the user enters the following street
+	| name   | pobox |
+	| Street pobox 0 | 06161 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name           | pobox |
+	| Street pobox 0 | 06161 |

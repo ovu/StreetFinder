@@ -52,7 +52,7 @@ namespace StreetFinder
             Directory.Delete(StreetsIndexDirectory, true);
         }
 
-        public IEnumerable<Street> SearchForStreets(int zipCode, string streetName)
+        public IEnumerable<Street> SearchForStreets(string zipCode, string streetName)
         {
             var directory = FSDirectory.Open(new DirectoryInfo(StreetsIndexDirectory));
 
@@ -81,7 +81,7 @@ namespace StreetFinder
             return result;
         }
 
-        private IEnumerable<Street> SearchStreetInIndex(int zipCode, string streetName, FSDirectory directory)
+        private IEnumerable<Street> SearchStreetInIndex(string zipCode, string streetName, FSDirectory directory)
         {
             IndexReader indexReader = IndexReader.Open(directory, true);
 
@@ -109,7 +109,7 @@ namespace StreetFinder
                         new Street
                             {
                                 Name = documentFromSearcher.Get("Name"),
-                                Pobox = int.Parse(documentFromSearcher.Get("Pobox"))
+                                Pobox = documentFromSearcher.Get("Pobox")
                             };
                 }
             }
