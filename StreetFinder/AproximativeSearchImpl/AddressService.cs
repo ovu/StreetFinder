@@ -5,11 +5,11 @@ using StreetFinder;
 
 namespace AproximativeSearchImpl
 {
-    public class AproimativeSearch: IAddressService
+    public class AddressService: IAddressService
     {
         private StreetRepositoryLucene streetRepository;
 
-        public AproimativeSearch()
+        public AddressService()
         {
             streetRepository = new StreetRepositoryLucene();    
         }
