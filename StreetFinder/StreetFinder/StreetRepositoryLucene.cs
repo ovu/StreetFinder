@@ -63,6 +63,9 @@ namespace StreetFinder
 
             foreach (var street in SearchStreetInIndex(zipCode, streetName, ngramDirectory)) yield return street;
 
+            var ngramFuzziDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+            foreach (var street in FuzziSearchStreetInIndex(zipCode, streetName, ngramFuzziDirectory)) yield return street;
+
         }
 
         private string GetQueryForStreetName(string streetName, string queryOperator)
@@ -84,6 +87,16 @@ namespace StreetFinder
 
         private IEnumerable<Street> SearchStreetInIndex(string zipCode, string streetName, FSDirectory directory)
         {
+            return SearchStreetInIndex(zipCode, streetName, directory, "*");
+        }
+
+        private IEnumerable<Street> FuzziSearchStreetInIndex(string zipCode, string streetName, FSDirectory directory)
+        {
+            return SearchStreetInIndex(zipCode, streetName, directory, "~0.6");
+        }
+
+        private IEnumerable<Street> SearchStreetInIndex(string zipCode, string streetName, FSDirectory directory, string queryPostfix)
+        {
             IndexReader indexReader = IndexReader.Open(directory, true);
 
             Searcher indexSearch = new IndexSearcher(indexReader);
@@ -95,7 +108,7 @@ namespace StreetFinder
             var foundIds = new List<string>();
 
             // Search with Query parser
-            var streetNameQuery = GetQueryForStreetName(streetName, "*");
+            var streetNameQuery = GetQueryForStreetName(streetName, queryPostfix);
             var query = queryParser.Parse(string.Format("{0} AND Pobox:{1}", streetNameQuery, zipCode));
 
             var resultDocs = indexSearch.Search(query, 5);
@@ -127,6 +140,7 @@ namespace StreetFinder
             streetDocument.Add(new Field("Name", street.Name, Field.Store.YES, Field.Index.ANALYZED));
             streetDocument.Add(new Field("Pobox", street.Pobox.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
+            // Write standard
             var directory = FSDirectory.Open(new DirectoryInfo(StreetsIndexDirectory));
             Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
 

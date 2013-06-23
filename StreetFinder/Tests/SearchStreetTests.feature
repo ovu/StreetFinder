@@ -148,3 +148,16 @@ Scenario: Search an street when the Pobox starts with 0
 	Then the user should have the following autocomplete suggestions
 	| name           | pobox |
 	| Street pobox 0 | 06161 |
+
+# Numbers in the name of the street
+
+# Levenshtein distance
+
+Scenario: Search an street when the name was not written correctly
+	Given the user enters the following street
+	| name              | pobox |
+	| wahnhof isator	| 86161 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name                | pobox |
+	| S-Bahnhof Isartor | 86161 |
