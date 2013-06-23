@@ -148,7 +148,7 @@ namespace StreetFinder
 
             // Write edgegram
             var edgeDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
-            var streetEdgeGramAnalyzer = new StreetAnalyzer();
+            var streetEdgeGramAnalyzer = new StreetAnalyzer(Version.LUCENE_30);
             WriteInIndex(streetDocument, edgeDirectory, streetEdgeGramAnalyzer);
         }
 

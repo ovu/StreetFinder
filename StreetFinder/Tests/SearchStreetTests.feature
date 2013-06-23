@@ -1,7 +1,7 @@
 ﻿Feature: SearchStreetTests
 	In order to enter my address information
 	As a user from an internet portal
-	I want to be told suggestions about possible streetss
+	I want to be told suggestions about possible streets
 
 Background: 
 	Given in the repository is stored the street
@@ -161,26 +161,3 @@ Scenario: Search an street when the name contains numbers
 	Then the user should have the following autocomplete suggestions
 	| name                | pobox |
 	| U12345 station | 86161 |
-# Levenshtein distance
-
-Scenario: Search an street when the name was not written correctly
-	Given the user enters the following street
-	| name              | pobox |
-	| wahnhof isator	| 86161 |
-	When the portal search for streets
-	Then the user should have the following autocomplete suggestions
-	| name                | pobox |
-	| S-Bahnhof Isartor | 86161 |
-
-Scenario: Search an street when the name is very different from the original one
-	Given the user enters the following street
-	| name              | pobox |
-	| wahnof iseertor	| 86161 |
-	When the portal search for streets
-	Then the user should not have the following autocomplete suggestions
-	| name                | pobox |
-	| S-Bahnhof Isartor | 86161 |
-
-# case streeet less than 3 chars
-
-# case numbers
