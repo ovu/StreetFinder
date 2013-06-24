@@ -33,8 +33,8 @@ namespace Tests
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "LevenshteinDistance", "In order to enter my address information\r\nAs a user from an internet portal\r\nI wa" +
-                    "nt to be told suggestions about possible streets\r\neven when the text In entered " +
-                    "is not completely correct", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "nt to be told suggestions about possible streets\r\neven when the text I entered i" +
+                    "s not completely correct", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -116,11 +116,9 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search an street when the name is very different from the original one")]
-        [NUnit.Framework.IgnoreAttribute()]
         public virtual void SearchAnStreetWhenTheNameIsVeryDifferentFromTheOriginalOne()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street when the name is very different from the original one", new string[] {
-                        "ignore"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street when the name is very different from the original one", ((string[])(null)));
 #line 22
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -130,7 +128,7 @@ this.FeatureBackground();
                         "name",
                         "pobox"});
             table4.AddRow(new string[] {
-                        "wahnof iseertor",
+                        "wahnof iseerdor",
                         "86161"});
 #line 23
  testRunner.Given("the user enters the following street", ((string)(null)), table4, "Given ");
@@ -183,10 +181,10 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search an street when the name of the street contains numbers")]
-        public virtual void SearchAnStreetWhenTheNameOfTheStreetContainsNumbers()
+        [NUnit.Framework.DescriptionAttribute("Search case insensitive an street")]
+        public virtual void SearchCaseInsensitiveAnStreet()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street when the name of the street contains numbers", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search case insensitive an street", ((string[])(null)));
 #line 40
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -196,21 +194,34 @@ this.FeatureBackground();
                         "name",
                         "pobox"});
             table8.AddRow(new string[] {
-                        "U12345 Isartor",
-                        "86165"});
+                        "BAHNHOF Isertor",
+                        "86161"});
 #line 41
- testRunner.Given("in the repository is stored the street", ((string)(null)), table8, "Given ");
+ testRunner.Given("the user enters the following street", ((string)(null)), table8, "Given ");
+#line 44
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
                         "pobox"});
             table9.AddRow(new string[] {
-                        "U1245",
-                        "86165"});
-#line 44
- testRunner.And("the user enters the following street", ((string)(null)), table9, "And ");
-#line 47
- testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                        "S-Bahnhof Isartor",
+                        "86161"});
+#line 45
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table9, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search an street when the name of the street contains numbers")]
+        public virtual void SearchAnStreetWhenTheNameOfTheStreetContainsNumbers()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street when the name of the street contains numbers", ((string[])(null)));
+#line 49
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "name",
@@ -218,8 +229,28 @@ this.FeatureBackground();
             table10.AddRow(new string[] {
                         "U12345 Isartor",
                         "86165"});
-#line 48
- testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table10, "Then ");
+#line 50
+ testRunner.Given("in the repository is stored the street", ((string)(null)), table10, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table11.AddRow(new string[] {
+                        "U1245",
+                        "86165"});
+#line 53
+ testRunner.And("the user enters the following street", ((string)(null)), table11, "And ");
+#line 56
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table12.AddRow(new string[] {
+                        "U12345 Isartor",
+                        "86165"});
+#line 57
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table12, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

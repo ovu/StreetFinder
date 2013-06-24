@@ -2,7 +2,7 @@
 	In order to enter my address information
 	As a user from an internet portal
 	I want to be told suggestions about possible streets
-	even when the text In entered is not completely correct
+	even when the text I entered is not completely correct
 
 Background: 
 	Given in the repository is stored the street
@@ -18,11 +18,11 @@ Scenario: Search an street when the name was not written correctly
 	| name                | pobox |
 	| S-Bahnhof Isartor | 86161 |
 
-@ignore
+
 Scenario: Search an street when the name is very different from the original one
 	Given the user enters the following street
 	| name              | pobox |
-	| wahnof iseertor	| 86161 |
+	| wahnof iseerdor	| 86161 |
 	When the portal search for streets
 	Then the user should not have the following autocomplete suggestions
 	| name                | pobox |
@@ -34,6 +34,15 @@ Scenario: Search an street when the text entered has less than three characters
 	| wa	| 86161 |
 	When the portal search for streets
 	Then the user should not have the following autocomplete suggestions
+	| name                | pobox |
+	| S-Bahnhof Isartor | 86161 |
+
+Scenario: Search case insensitive an street
+	Given the user enters the following street
+	| name  | pobox |
+	| BAHNHOF Isertor	| 86161 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
 	| name                | pobox |
 	| S-Bahnhof Isartor | 86161 |
 
