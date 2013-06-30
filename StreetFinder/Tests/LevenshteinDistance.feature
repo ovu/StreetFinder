@@ -4,7 +4,7 @@
 	I want to be told suggestions about possible streets
 	even when the text I entered is not completely correct
 
-Scenario: Search an street when the name was not written correctly
+Scenario: Search a street when the name was not written correctly
 	Given in the repository is stored the street
 	| name              | pobox |
 	| S-Bahnhof Isartor | 86161 |
@@ -16,7 +16,7 @@ Scenario: Search an street when the name was not written correctly
 	| name                | pobox |
 	| S-Bahnhof Isartor | 86161 |
 
-Scenario: Search an street when the name is very different from the original one
+Scenario: Search a street when the name is very different from the original one
 	Given in the repository is stored the street
 	| name              | pobox |
 	| S-Bahnhof Isartor | 86161 |
@@ -28,7 +28,7 @@ Scenario: Search an street when the name is very different from the original one
 	| name                | pobox |
 	| S-Bahnhof Isartor | 86161 |
 
-Scenario: Search an street when the text entered has less than three characters
+Scenario: Search a street when the text entered has less than three characters
 	Given in the repository is stored the street
 	| name              | pobox |
 	| S-Bahnhof Isartor | 86161 |
@@ -40,7 +40,7 @@ Scenario: Search an street when the text entered has less than three characters
 	| name                | pobox |
 	| S-Bahnhof Isartor | 86161 |
 
-Scenario: Search case insensitive an street
+Scenario: Search a street case insensitive
 	Given in the repository is stored the street
 	| name              | pobox |
 	| S-Bahnhof Isartor | 86161 |

@@ -1,9 +1,8 @@
-﻿Feature: SearchStreetTests
+﻿Feature: TermSeach
 	In order to enter my address information
 	As a user from an internet portal
 	I want to be told suggestions about possible streets
-
-# Term Search
+	When the terms I entered match with the name of the streets
 
 Scenario: Search a street that matches with the term of a given street name
     Given in the repository is stored the street

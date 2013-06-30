@@ -4,12 +4,6 @@
 	I want to be told suggestions about possible streets
 	when the text I entered matches with the prefix of a street name
 
-#Background: 
-#	Given in the repository is stored the street
-#	| name              | pobox |
-#	| S-Bahnhof Isartor | 86161 |
-
-
 Scenario: Search an street that matches with the prefix of a given street name
 	Given in the repository is stored the street
 	| name              | pobox |

@@ -67,10 +67,10 @@ namespace Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search an street when the name was not written correctly")]
-        public virtual void SearchAnStreetWhenTheNameWasNotWrittenCorrectly()
+        [NUnit.Framework.DescriptionAttribute("Search a street when the name was not written correctly")]
+        public virtual void SearchAStreetWhenTheNameWasNotWrittenCorrectly()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street when the name was not written correctly", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search a street when the name was not written correctly", ((string[])(null)));
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -107,10 +107,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search an street when the name is very different from the original one")]
-        public virtual void SearchAnStreetWhenTheNameIsVeryDifferentFromTheOriginalOne()
+        [NUnit.Framework.DescriptionAttribute("Search a street when the name is very different from the original one")]
+        public virtual void SearchAStreetWhenTheNameIsVeryDifferentFromTheOriginalOne()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street when the name is very different from the original one", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search a street when the name is very different from the original one", ((string[])(null)));
 #line 19
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -147,10 +147,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search an street when the text entered has less than three characters")]
-        public virtual void SearchAnStreetWhenTheTextEnteredHasLessThanThreeCharacters()
+        [NUnit.Framework.DescriptionAttribute("Search a street when the text entered has less than three characters")]
+        public virtual void SearchAStreetWhenTheTextEnteredHasLessThanThreeCharacters()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search an street when the text entered has less than three characters", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search a street when the text entered has less than three characters", ((string[])(null)));
 #line 31
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -187,10 +187,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search case insensitive an street")]
-        public virtual void SearchCaseInsensitiveAnStreet()
+        [NUnit.Framework.DescriptionAttribute("Search a street case insensitive")]
+        public virtual void SearchAStreetCaseInsensitive()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search case insensitive an street", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search a street case insensitive", ((string[])(null)));
 #line 43
 this.ScenarioSetup(scenarioInfo);
 #line hidden

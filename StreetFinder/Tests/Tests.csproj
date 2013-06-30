@@ -61,10 +61,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchStreetSteps.cs" />
-    <Compile Include="SearchStreetTests.feature.cs">
+    <Compile Include="TermSearch.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SearchStreetTests.feature</DependentUpon>
+      <DependentUpon>TermSearch.feature</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -78,9 +78,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PrefixSearch.feature.cs</LastGenOutput>
     </None>
-    <None Include="SearchStreetTests.feature">
+    <None Include="TermSearch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SearchStreetTests.feature.cs</LastGenOutput>
+      <LastGenOutput>TermSearch.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
