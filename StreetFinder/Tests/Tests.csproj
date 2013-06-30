@@ -54,6 +54,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LevenshteinDistance.feature</DependentUpon>
     </Compile>
+    <Compile Include="PrefixSearch.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrefixSearch.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchStreetSteps.cs" />
     <Compile Include="SearchStreetTests.feature.cs">
@@ -69,6 +74,10 @@
       <LastGenOutput>LevenshteinDistance.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="PrefixSearch.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PrefixSearch.feature.cs</LastGenOutput>
+    </None>
     <None Include="SearchStreetTests.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchStreetTests.feature.cs</LastGenOutput>

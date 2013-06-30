@@ -37,9 +37,17 @@ namespace StreetFinder
 
         public void CreateStreetRepository()
         {
-            FSDirectory.Open(new DirectoryInfo(StreetsIndexDirectory));
-            FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+            var stdDirectory = FSDirectory.Open(new DirectoryInfo(StreetsIndexDirectory));
+            var stdIndex = new IndexWriter(stdDirectory, new StandardAnalyzer(Version.LUCENE_30), true, IndexWriter.MaxFieldLength.LIMITED);
+            stdIndex.Commit();
+            stdIndex.Dispose(true);
+            stdDirectory.Dispose();
 
+            var edgeGramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+            var edgeGramIndex = new IndexWriter(edgeGramDirectory, new StandardAnalyzer(Version.LUCENE_30), true, IndexWriter.MaxFieldLength.LIMITED);
+            edgeGramIndex.Commit();
+            edgeGramIndex.Dispose(true);
+            edgeGramDirectory.Dispose();
         }
 
         public bool ExistStreetRepository()
@@ -55,17 +63,46 @@ namespace StreetFinder
 
         public IEnumerable<Street> SearchForStreets(string zipCode, string streetName)
         {
+            var foundStreetNames = new List<string>();
+
             var directory = FSDirectory.Open(new DirectoryInfo(StreetsIndexDirectory));
 
-            foreach (var street in SearchStreetInIndex(zipCode, streetName, directory)) yield return street;
+            foreach (var street in SearchStreetInIndex(zipCode, streetName, directory))
+            {
+                if (!foundStreetNames.Contains(street.Name))
+                {
+                    foundStreetNames.Add(street.Name);
+                    yield return street;
+                }
+            }
+
+            directory.Dispose();
 
             var ngramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
 
-            foreach (var street in SearchStreetInIndex(zipCode, streetName, ngramDirectory)) yield return street;
+            foreach (var street in SearchStreetInIndex(zipCode, streetName, ngramDirectory))
+            {
+                if (!foundStreetNames.Contains(street.Name))
+                {
+                    foundStreetNames.Add(street.Name);
+                    yield return street;
+                }
+            }
+
+            ngramDirectory.Dispose();
 
             var ngramFuzziDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
-            foreach (var street in FuzziSearchStreetInIndex(zipCode, streetName, ngramFuzziDirectory)) yield return street;
 
+            foreach (var street in FuzziSearchStreetInIndex(zipCode, streetName, ngramFuzziDirectory))
+            {
+                if (!foundStreetNames.Contains(street.Name))
+                {
+                    foundStreetNames.Add(street.Name);
+                    yield return street;
+                }
+            }
+
+            ngramDirectory.Dispose();
         }
 
         private string GetQueryForStreetName(string streetName, string queryOperator)
@@ -105,8 +142,6 @@ namespace StreetFinder
 
             var queryParser = new QueryParser(Version.LUCENE_30, "Name", analyzer);
 
-            var foundIds = new List<string>();
-
             // Search with Query parser
             var streetNameQuery = GetQueryForStreetName(streetName, queryPostfix);
             var query = queryParser.Parse(string.Format("{0} AND Pobox:{1}", streetNameQuery, zipCode));
@@ -117,20 +152,17 @@ namespace StreetFinder
             foreach (var hit in hits)
             {
                 var documentFromSearcher = indexSearch.Doc(hit.Doc);
-                if (!foundIds.Contains(documentFromSearcher.Get("Id")))
-                {
-                    yield return
-                        new Street
-                            {
-                                Name = documentFromSearcher.Get("Name"),
-                                Pobox = documentFromSearcher.Get("Pobox")
-                            };
-                }
+                yield return
+                     new Street
+                         {
+                             Name = documentFromSearcher.Get("Name"),
+                             Pobox = documentFromSearcher.Get("Pobox")
+                         };
             }
 
             indexSearch.Dispose();
 
-            directory.Dispose();
+            indexReader.Dispose();
         }
 
         public void InsertStreet(Street street)
@@ -154,8 +186,8 @@ namespace StreetFinder
 
         private void WriteInIndex(Document streetDocument, FSDirectory directory, Analyzer analyzer)
         {
-            var indexWriter = new IndexWriter(directory, analyzer, true, IndexWriter.MaxFieldLength.LIMITED);
-
+            var indexWriter = new IndexWriter(directory, analyzer, false, IndexWriter.MaxFieldLength.LIMITED);
+            
             indexWriter.AddDocument(streetDocument);
 
             indexWriter.Optimize();

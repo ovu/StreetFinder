@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using NUnit.Framework;
 using StreetFinder;
 using TechTalk.SpecFlow;
 
@@ -15,12 +16,6 @@ namespace Tests
         public static void PrepareRepository()
         {
             repository = new StreetRepositoryLucene();
-
-            if (repository.ExistStreetRepository())
-            {
-                repository.DeleteStreetRepository();
-            }
-            repository.CreateStreetRepository();
         }
 
         [Given(@"the repository is initialized")]
@@ -31,6 +26,12 @@ namespace Tests
         [Given(@"in the repository is stored the street")]
         public void GivenInTheRepositoryIsStoredTheStreet(Table table)
         {
+            if (repository.ExistStreetRepository())
+            {
+                repository.DeleteStreetRepository();
+            }
+            repository.CreateStreetRepository();
+
             foreach (var row in table.Rows)
             {
                 var street = new Street {Name = row["name"], Pobox = row["pobox"]};
@@ -78,6 +79,8 @@ namespace Tests
                 searchResultList.Should()
                             .Contain(s => s.Name.Equals(streetToBeFound.Name) && s.Pobox.Equals(streetToBeFound.Pobox));
             }
+
+            Assert.AreEqual(table.Rows.Count, searchResultList.Count);
         }
 
         [Then(@"the user should not have the following autocomplete suggestions")]
