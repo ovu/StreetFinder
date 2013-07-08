@@ -76,3 +76,28 @@ Scenario: Fuzzi search a duplicated street should return just one street
 	Then the user should have the following autocomplete suggestions
 	| name           | pobox |
 	| U12345 Isartor | 86165 |
+
+# Synonym
+Scenario: Search for a street using the word strase instead of the synonym strasse
+	Given in the repository is stored the street
+	| name				  | pobox |
+	| Burgstr.            | 80331 |
+	And the user enters the following street
+	| name          | pobox |
+	| burg strase	| 80331 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name      | pobox |
+	| Burgstr.  | 80331 |
+
+Scenario: Search for a street using the word strae instead of synonym strasse or straße
+	Given in the repository is stored the street
+	| name				  | pobox |
+	| Burgstr.            | 80331 |
+	And the user enters the following street
+	| name          | pobox |
+	| burg strae	| 80331 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name      | pobox |
+	| Burgstr.  | 80331 |

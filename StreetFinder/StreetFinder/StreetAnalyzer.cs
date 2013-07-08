@@ -4,6 +4,7 @@ using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.NGram;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Util;
+using StreetFinder.SynonymFilter;
 
 namespace StreetFinder
 {
@@ -31,7 +32,9 @@ namespace StreetFinder
             
             var edgeTokens = new EdgeNGramTokenFilter(baseTokens, Side.FRONT, 3, 20);
 
-            return edgeTokens;
+            var synonymTokens = new SynonymTokenFilter(edgeTokens, new SynonymEngine());
+
+            return synonymTokens;
         }
     }
 }

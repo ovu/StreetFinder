@@ -148,3 +148,28 @@ Scenario: Search a duplicate street that matches with the prefix of a given stre
 	Then the user should have the following autocomplete suggestions
 	| name                | pobox |
 	| Saarbrücker | 86161 |
+
+# Synonym
+Scenario: Search for a street using the word strasse instead of street
+	Given in the repository is stored the street
+	| name				  | pobox |
+	| Burgstr.            | 80331 |
+	And the user enters the following street
+	| name          | pobox |
+	| burg strasse	| 80331 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name      | pobox |
+	| Burgstr.  | 80331 |
+
+Scenario: Search for a street using the word straße instead of street
+	Given in the repository is stored the street
+	| name				  | pobox |
+	| Burgstr.            | 80331 |
+	And the user enters the following street
+	| name          | pobox |
+	| burg straße	| 80331 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name      | pobox |
+	| Burgstr.  | 80331 |

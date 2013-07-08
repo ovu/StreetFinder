@@ -51,10 +51,13 @@
     <Compile Include="IStreetSearchRepository.cs" />
     <Compile Include="Street.cs" />
     <Compile Include="StreetAnalyzer.cs" />
-    <Compile Include="StreetFilter.cs" />
     <Compile Include="StreetRepositoryLucene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SynonymFilter\ISynonymEngine.cs" />
+    <Compile Include="SynonymFilter\SynonymEngine.cs" />
+    <Compile Include="SynonymFilter\SynonymTokenFilter.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
