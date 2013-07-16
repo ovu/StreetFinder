@@ -190,7 +190,7 @@ namespace StreetFinder
             
             indexWriter.AddDocument(streetDocument);
 
-            indexWriter.Optimize();
+            // indexWriter.Optimize();
 
             indexWriter.Commit();
 

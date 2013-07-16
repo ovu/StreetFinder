@@ -9,6 +9,7 @@ namespace AproximativeSearchImpl
     public class AddressService: IAddressService
     {
         private readonly StreetRepositoryLucene streetRepository;
+        private bool _repositoryExists = false;
 
         public AddressService()
         {
@@ -44,9 +45,10 @@ namespace AproximativeSearchImpl
 
             var street = new Street {Name = streetName, Pobox = zip};
 
-            if (!streetRepository.ExistStreetRepository())
+            if (_repositoryExists == false && !streetRepository.ExistStreetRepository())
             {
                 streetRepository.CreateStreetRepository();
+                _repositoryExists = true;
             }
 
             streetRepository.InsertStreet(street);
