@@ -8,29 +8,27 @@ using StreetFinder.SynonymFilter;
 
 namespace StreetFinder
 {
-    public class StreetAnalyzer: StandardAnalyzer
+    public class StreetAnalyzer: Analyzer
     {
-        public StreetAnalyzer(Version matchVersion) : base(matchVersion)
-        {
-        }
+        public const int DEFAULT_MAX_TOKEN_LENGTH = 255;
 
-        public StreetAnalyzer(Version matchVersion, ISet<string> stopWords) : base(matchVersion, stopWords)
-        {
-        }
+        private const int maxTokenLength = DEFAULT_MAX_TOKEN_LENGTH;
 
-        public StreetAnalyzer(Version matchVersion, FileInfo stopwords) : base(matchVersion, stopwords)
-        {
-        }
+        private readonly Version _matchVersion;
 
-        public StreetAnalyzer(Version matchVersion, TextReader stopwords) : base(matchVersion, stopwords)
+        public StreetAnalyzer(Version matchVersion)
         {
+            this._matchVersion = matchVersion;
         }
 
         public override TokenStream TokenStream(string fieldName, TextReader reader)
         {
-            var baseTokens = base.TokenStream(fieldName, reader);
+            var tokenStream = new StandardTokenizer(_matchVersion, reader) {MaxTokenLength = maxTokenLength};
+
+            TokenStream result = new StandardFilter(tokenStream);
+            result = new LowerCaseFilter(result);
             
-            var edgeTokens = new EdgeNGramTokenFilter(baseTokens, Side.FRONT, 3, 20);
+            var edgeTokens = new EdgeNGramTokenFilter(result, Side.FRONT, 1, 30);
 
             var synonymTokens = new SynonymTokenFilter(edgeTokens, new SynonymEngine());
 

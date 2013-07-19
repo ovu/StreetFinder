@@ -73,3 +73,28 @@ Scenario: Search a duplicated street by term should return just one street
 	Then the user should have the following autocomplete suggestions
 	| name              | pobox |
 	| S-Bahnhof Isartor | 86161 |
+
+# Shorts terms
+Scenario: Search a street when the term is short
+	Given in the repository is stored the street
+	| name    | pobox |
+	| An Ufer | 86111 |
+	And the user enters the following street
+	| name | pobox |
+	| an | 86111 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name    | pobox |
+	| An Ufer | 86111 |
+
+Scenario: Search a street has a one word when the term is short
+	Given in the repository is stored the street
+	| name    | pobox |
+	| Nr. | 82067 |
+	And the user enters the following street
+	| name | pobox |
+	| Nr | 82067 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name    | pobox |
+	| Nr. | 82067 |
