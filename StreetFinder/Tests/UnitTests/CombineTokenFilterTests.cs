@@ -23,6 +23,40 @@ namespace Tests.UnitTests
         }
 
         [Test]
+        public void The_first_terms_in_a_streetName_should_be_combined()
+        {
+            // Act
+            var tokens = AnalyzerTestHelper.TokensFromAnalysis(new StreetAnalyzer(Version.LUCENE_30), "Am Bietricher Holz");
+            var listTokens = tokens.ToList();
+
+            // Assert
+            listTokens.Should().Contain("ambietricher");
+            listTokens.Should().Contain("bietricherholz");
+        }
+
+        [Test]
+        public void The_last_terms_in_a_streetName_should_be_combined()
+        {
+            // Act
+            var tokens = AnalyzerTestHelper.TokensFromAnalysis(new StreetAnalyzer(Version.LUCENE_30), "Am Bietricher Holz");
+            var listTokens = tokens.ToList();
+
+            // Assert
+            listTokens.Should().Contain("bietricherholz");
+        }
+
+        [Test]
+        public void All_the_terms_should_not_be_combined()
+        {
+            // Act
+            var tokens = AnalyzerTestHelper.TokensFromAnalysis(new StreetAnalyzer(Version.LUCENE_30), "Am Bietricher Holz");
+            var listTokens = tokens.ToList();
+
+            // Assert
+            listTokens.Should().NotContain("ambietricherholz");
+        }
+
+        [Test]
         public void The_terms_in_a_streetName_should_not_be_combined_when_the_name_starts_with_st()
         {
             // Act
@@ -66,7 +100,6 @@ namespace Tests.UnitTests
 
             // Assert
             listTokens.Should().Contain("benjaminallee");
-        }         
-
+        }                
     }
 }
