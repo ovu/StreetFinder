@@ -70,6 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TermSearch.feature</DependentUpon>
     </Compile>
+    <Compile Include="UnitTests\CombineTokenFilterTests.cs" />
     <Compile Include="UnitTests\StreetAnalyzerSynonymFilterTests.cs" />
     <Compile Include="UnitTests\AnalyzerTestHelper.cs" />
   </ItemGroup>

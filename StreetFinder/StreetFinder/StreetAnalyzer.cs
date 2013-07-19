@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.NGram;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Util;
+using StreetFinder.CombineFilter;
 using StreetFinder.SynonymFilter;
 
 namespace StreetFinder
@@ -18,7 +18,7 @@ namespace StreetFinder
 
         public StreetAnalyzer(Version matchVersion)
         {
-            this._matchVersion = matchVersion;
+            _matchVersion = matchVersion;
         }
 
         public override TokenStream TokenStream(string fieldName, TextReader reader)
@@ -27,12 +27,14 @@ namespace StreetFinder
 
             TokenStream result = new StandardFilter(tokenStream);
             result = new LowerCaseFilter(result);
-            
-            var edgeTokens = new EdgeNGramTokenFilter(result, Side.FRONT, 1, 30);
 
-            var synonymTokens = new SynonymTokenFilter(edgeTokens, new SynonymEngine());
+            var combineResult = new CombineTokenFilter(result);
 
-            return synonymTokens;
+            var synonymTokens = new SynonymTokenFilter(combineResult, new SynonymEngine());
+
+            var edgeTokens = new EdgeNGramTokenFilter(synonymTokens, Side.FRONT, 1, 30);
+
+            return edgeTokens;
         }
     }
 }

@@ -101,3 +101,16 @@ Scenario: Search for a street using the word strae instead of synonym strasse or
 	Then the user should have the following autocomplete suggestions
 	| name      | pobox |
 	| Burgstr.  | 80331 |
+
+# Combined terms
+Scenario: Search for a wrong written combined terms should find the street 
+	Given in the repository is stored the street
+	| name                           | pobox |
+	| Johann-Baptist-Zimmermann-Str. | 82069 |
+	And the user enters the following street
+	| name | pobox |
+	| JohanBatt | 82069 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name    | pobox |
+	| Johann-Baptist-Zimmermann-Str. | 82069 |

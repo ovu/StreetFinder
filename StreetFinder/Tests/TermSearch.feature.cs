@@ -363,6 +363,46 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Search combining terms should find the street")]
+        public virtual void SearchCombiningTermsShouldFindTheStreet()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search combining terms should find the street", ((string[])(null)));
+#line 103
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table23.AddRow(new string[] {
+                        "Johann-Baptist-Zimmermann-Str.",
+                        "82069"});
+#line 104
+ testRunner.Given("in the repository is stored the street", ((string)(null)), table23, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table24.AddRow(new string[] {
+                        "JohannBaptist",
+                        "82069"});
+#line 107
+ testRunner.And("the user enters the following street", ((string)(null)), table24, "And ");
+#line 110
+ testRunner.When("the portal search for streets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "pobox"});
+            table25.AddRow(new string[] {
+                        "Johann-Baptist-Zimmermann-Str.",
+                        "82069"});
+#line 111
+ testRunner.Then("the user should have the following autocomplete suggestions", ((string)(null)), table25, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

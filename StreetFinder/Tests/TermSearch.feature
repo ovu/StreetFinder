@@ -98,3 +98,16 @@ Scenario: Search a street has a one word when the term is short
 	Then the user should have the following autocomplete suggestions
 	| name    | pobox |
 	| Nr. | 82067 |
+
+# Combined terms
+Scenario: Search combining terms should find the street
+	Given in the repository is stored the street
+	| name                           | pobox |
+	| Johann-Baptist-Zimmermann-Str. | 82069 |
+	And the user enters the following street
+	| name | pobox |
+	| JohannBaptist | 82069 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name    | pobox |
+	| Johann-Baptist-Zimmermann-Str. | 82069 |

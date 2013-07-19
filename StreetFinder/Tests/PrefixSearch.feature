@@ -173,3 +173,16 @@ Scenario: Search for a street using the word straße instead of street
 	Then the user should have the following autocomplete suggestions
 	| name      | pobox |
 	| Burgstr.  | 80331 |
+
+# Combined terms
+Scenario: Search the prefix of a combined terms should find the street 
+	Given in the repository is stored the street
+	| name                           | pobox |
+	| Johann-Baptist-Zimmermann-Str. | 82069 |
+	And the user enters the following street
+	| name | pobox |
+	| JohannBapt | 82069 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name    | pobox |
+	| Johann-Baptist-Zimmermann-Str. | 82069 |

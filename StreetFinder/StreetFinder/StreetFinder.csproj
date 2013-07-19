@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombineFilter\CombineTokenFilter.cs" />
     <Compile Include="IStreetSearchRepository.cs" />
     <Compile Include="Street.cs" />
     <Compile Include="StreetAnalyzer.cs" />
