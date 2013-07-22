@@ -17,6 +17,7 @@ namespace Tests.UnitTests
             var listTokens = tokens.ToList();
 
             // Assert
+            listTokens.Should().Contain("einestr");
             listTokens.Should().Contain("strasse");
             listTokens.Should().Contain("straße");
         }
