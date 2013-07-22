@@ -50,18 +50,18 @@ namespace StreetFinder
         {
             var foundStreetNames = new List<string>();
 
-            var ngramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+            // var ngramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
 
-            foreach (var street in SearchStreetInIndex(zipCode, streetName, ngramDirectory))
-            {
-                if (!foundStreetNames.Contains(street.Name))
-                {
-                    foundStreetNames.Add(street.Name);
-                    yield return street;
-                }
-            }
+            //foreach (var street in SearchStreetInIndex(zipCode, streetName, ngramDirectory))
+            //{
+            //    if (!foundStreetNames.Contains(street.Name))
+            //    {
+            //        foundStreetNames.Add(street.Name);
+            //        yield return street;
+            //    }
+            //}
 
-            ngramDirectory.Dispose();
+            //ngramDirectory.Dispose();
 
             var ngramFuzziDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
 
@@ -74,7 +74,7 @@ namespace StreetFinder
                 }
             }
 
-            ngramDirectory.Dispose();
+            ngramFuzziDirectory.Dispose();
         }
 
         private string GetQueryForStreetName(string streetName, string queryOperator)

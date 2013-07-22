@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
+
 using Lucene.Net.Analysis;
+
 using Lucene.Net.Analysis.Tokenattributes;
 
 namespace StreetFinder.CombineFilter
 {
     public class CombineTokenFilter : TokenFilter
     {
-        private  string lastTerm;
+        private string lastTerm;
+
         private readonly Queue<string> _combinedTokensQueue = new Queue<string>();
+
         private bool addinCombinedTokens = false;
 
         public CombineTokenFilter(TokenStream input) : base(input)
@@ -17,53 +21,53 @@ namespace StreetFinder.CombineFilter
 
         public override bool IncrementToken()
         {
-            var attribute = input.GetAttribute<ITermAttribute>();
-
-            if (string.IsNullOrEmpty(attribute.Term))
+            if (_combinedTokensQueue.Count > 0)
             {
-                return input.IncrementToken();
+                var newAttribute = input.AddAttribute<ITermAttribute>();
+
+                newAttribute.SetTermBuffer(_combinedTokensQueue.Dequeue());
+
+                addinCombinedTokens = true;
+                lastTerm = "";
+
+                return true;
             }
 
-            var currentTerm = attribute.Term;
-
-            if (!addinCombinedTokens)
+            while (input.IncrementToken() && !addinCombinedTokens)
             {
-                if (!string.IsNullOrEmpty(lastTerm))
-                {
-                    _combinedTokensQueue.Enqueue(lastTerm + currentTerm);
-                }
+                var attribute = input.GetAttribute<ITermAttribute>();
 
-                if (!attribute.Term.Equals("dr") && !attribute.Term.Equals("prof") && !attribute.Term.Equals("st"))
+                if (attribute.Term.Equals("dr") || attribute.Term.Equals("prof") || attribute.Term.Equals("st"))
                 {
-                    //Add last word
-                    lastTerm = attribute.Term;
+                    _combinedTokensQueue.Enqueue(attribute.Term);
+
+                    lastTerm = "";
                 }
                 else
                 {
-                    lastTerm = "";
-                }
-                var resultIncrement = input.IncrementToken();
-                if (!resultIncrement && _combinedTokensQueue.Count > 0)
-                {
-                    addinCombinedTokens = true;
-                    lastTerm = "";
-                    if (_combinedTokensQueue.Count > 0)
+                    if (!string.IsNullOrEmpty(lastTerm))
                     {
-                        var newAttribute = input.AddAttribute<ITermAttribute>();
-                        newAttribute.SetTermBuffer(_combinedTokensQueue.Dequeue());
-                        lastTerm = "";
-                        return true;
+                        _combinedTokensQueue.Enqueue(lastTerm + attribute.Term);
                     }
-                }
-                return resultIncrement;
 
+                    lastTerm = attribute.Term;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(lastTerm))
+            {
+                _combinedTokensQueue.Enqueue(lastTerm);
             }
 
             if (_combinedTokensQueue.Count > 0)
             {
                 var newAttribute = input.AddAttribute<ITermAttribute>();
+
                 newAttribute.SetTermBuffer(_combinedTokensQueue.Dequeue());
+
+                addinCombinedTokens = true;
                 lastTerm = "";
+
                 return true;
             }
 
