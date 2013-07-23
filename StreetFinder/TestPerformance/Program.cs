@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using AproximativeSearchImpl;
 
 namespace TestPerformance
@@ -9,9 +11,9 @@ namespace TestPerformance
     {
         static void Main(string[] args)
         {
-            // LoadAllStreets();
+            LoadAllStreets();
 
-            SearchForStreet("89359", "An");
+           //SearchForStreet("80337", "ubahn");
         }
 
         public static void SearchForStreet(string zipcode, string street)
@@ -32,20 +34,27 @@ namespace TestPerformance
 
         public static void LoadAllStreets()
         {
-            var file = new StreamReader(@"c:\temp\TestStreets.csv", System.Text.Encoding.Default);
-            string line;
             var addressService = new AddressService();
 
             var watch = new Stopwatch();
             watch.Start();
 
             var count = 0;
-            while ((line = file.ReadLine()) != null)
+            var lines = File.ReadLines(@"c:\temp\TestStreets.csv", System.Text.Encoding.Default);
+
+            var collection = new BlockingCollection<string>();
+
+            foreach (var line in lines)
             {
-                var tokens = line.Split(';');
-                addressService.Insert(tokens[0], tokens[1]);
-                count++;
+                collection.Add(line);
             }
+
+            Parallel.ForEach(collection.GetConsumingEnumerable(), c =>
+                {
+                    var tokens = c.Split(';');
+                    addressService.Insert(tokens[0], tokens[1]);
+                    count++;                                    
+                });
             
             watch.Stop();
 

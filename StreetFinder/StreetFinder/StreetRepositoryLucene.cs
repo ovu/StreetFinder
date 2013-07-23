@@ -29,11 +29,14 @@ namespace StreetFinder
 
         public void CreateStreetRepository()
         {
-            var edgeGramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
-            var edgeGramIndex = new IndexWriter(edgeGramDirectory, new StandardAnalyzer(Version.LUCENE_30), true, IndexWriter.MaxFieldLength.LIMITED);
-            edgeGramIndex.Commit();
-            edgeGramIndex.Dispose(true);
-            edgeGramDirectory.Dispose();
+            lock (this)
+            {
+                var edgeGramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+                var edgeGramIndex = new IndexWriter(edgeGramDirectory, new StandardAnalyzer(Version.LUCENE_30), true, IndexWriter.MaxFieldLength.LIMITED);
+                edgeGramIndex.Commit();
+                edgeGramIndex.Dispose(true);
+                edgeGramDirectory.Dispose();
+            }
         }
 
         public bool ExistStreetRepository()
@@ -140,7 +143,7 @@ namespace StreetFinder
         public void InsertStreet(Street street)
         {
             var streetDocument = new Document();
-            streetDocument.Add(new Field("Id", Guid.NewGuid().ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            // streetDocument.Add(new Field("Id", Guid.NewGuid().ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             streetDocument.Add(new Field("Name", street.Name, Field.Store.YES, Field.Index.ANALYZED));
             streetDocument.Add(new Field("Pobox", street.Pobox.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
@@ -152,15 +155,18 @@ namespace StreetFinder
 
         private void WriteInIndex(Document streetDocument, FSDirectory directory, Analyzer analyzer)
         {
-            var indexWriter = new IndexWriter(directory, analyzer, false, IndexWriter.MaxFieldLength.LIMITED);
-            
-            indexWriter.AddDocument(streetDocument);
+            lock (this)
+            {
+                var indexWriter = new IndexWriter(directory, analyzer, false, IndexWriter.MaxFieldLength.LIMITED);
+                
+                indexWriter.AddDocument(streetDocument);
 
-            // indexWriter.Optimize();
+                // indexWriter.Optimize();
 
-            indexWriter.Commit();
+                indexWriter.Commit();
 
-            indexWriter.Dispose(true);
+                indexWriter.Dispose(true);
+            }
         }
 
         public void InsertStreets(IList<Street> streets)
