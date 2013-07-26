@@ -70,6 +70,19 @@ namespace Tests.UnitTests
         }
 
         [Test]
+        public void The_terms_in_a_streetName_should_not_be_combined_when_the_name_starts_with_st_and_had_other_characters()
+        {
+            // Act
+            var tokens = AnalyzerTestHelper.TokensFromAnalysis(new StreetAnalyzer(Version.LUCENE_30), "St.-Martin-Platz");
+            var listTokens = tokens.ToList();
+
+            // Assert
+            listTokens.Should().Contain("st");
+            listTokens.Should().Contain("martinplatz");
+            listTokens.Should().Contain("platz");
+        }
+
+        [Test]
         public void The_terms_in_a_streetName_should_not_be_combined_when_the_name_starts_with_dr()
         {
             // Act

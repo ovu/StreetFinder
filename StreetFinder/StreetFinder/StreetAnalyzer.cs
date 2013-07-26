@@ -3,8 +3,8 @@ using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.NGram;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Util;
+using StreetFinder.AbbreviationsFilter;
 using StreetFinder.CombineFilter;
-using StreetFinder.SynonymFilter;
 
 namespace StreetFinder
 {
@@ -30,9 +30,9 @@ namespace StreetFinder
 
             var combineResult = new CombineTokenFilter(result);
 
-            var synonymTokens = new SynonymTokenFilter(combineResult, new SynonymEngine());
+            var synonymTokens = new AbbreviationTokenFilter(combineResult, new AbbreviationsEngine());
 
-            var edgeTokens = new EdgeNGramTokenFilter(synonymTokens, Side.FRONT, 1, 30);
+            var edgeTokens = new EdgeNGramTokenFilter(synonymTokens, Side.FRONT, 3, 30);
 
             return edgeTokens;
         }

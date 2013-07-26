@@ -29,14 +29,11 @@ namespace StreetFinder
 
         public void CreateStreetRepository()
         {
-            lock (this)
-            {
-                var edgeGramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
-                var edgeGramIndex = new IndexWriter(edgeGramDirectory, new StandardAnalyzer(Version.LUCENE_30), true, IndexWriter.MaxFieldLength.LIMITED);
-                edgeGramIndex.Commit();
-                edgeGramIndex.Dispose(true);
-                edgeGramDirectory.Dispose();
-            }
+            var edgeGramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+            var edgeGramIndex = new IndexWriter(edgeGramDirectory, new StandardAnalyzer(Version.LUCENE_30), true, IndexWriter.MaxFieldLength.LIMITED);
+            edgeGramIndex.Commit();
+            edgeGramIndex.Dispose(true);
+            edgeGramDirectory.Dispose();
         }
 
         public bool ExistStreetRepository()
@@ -53,18 +50,18 @@ namespace StreetFinder
         {
             var foundStreetNames = new List<string>();
 
-            // var ngramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+            var ngramDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
 
-            //foreach (var street in SearchStreetInIndex(zipCode, streetName, ngramDirectory))
-            //{
-            //    if (!foundStreetNames.Contains(street.Name))
-            //    {
-            //        foundStreetNames.Add(street.Name);
-            //        yield return street;
-            //    }
-            //}
+            foreach (var street in SearchStreetInIndex(zipCode, streetName, ngramDirectory))
+            {
+                if (!foundStreetNames.Contains(street.Name))
+                {
+                    foundStreetNames.Add(street.Name);
+                    yield return street;
+                }
+            }
 
-            //ngramDirectory.Dispose();
+            ngramDirectory.Dispose();
 
             var ngramFuzziDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
 
@@ -147,26 +144,25 @@ namespace StreetFinder
             streetDocument.Add(new Field("Name", street.Name, Field.Store.YES, Field.Index.ANALYZED));
             streetDocument.Add(new Field("Pobox", street.Pobox.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED));
 
-            // Write edgegram
+            // Write edgegram            
             var edgeDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
             var streetEdgeGramAnalyzer = new StreetAnalyzer(Version.LUCENE_30);
             WriteInIndex(streetDocument, edgeDirectory, streetEdgeGramAnalyzer);
+
+            edgeDirectory.Dispose();
         }
 
         private void WriteInIndex(Document streetDocument, FSDirectory directory, Analyzer analyzer)
         {
-            lock (this)
-            {
-                var indexWriter = new IndexWriter(directory, analyzer, false, IndexWriter.MaxFieldLength.LIMITED);
+            var indexWriter = new IndexWriter(directory, analyzer, false, IndexWriter.MaxFieldLength.LIMITED);
                 
-                indexWriter.AddDocument(streetDocument);
+            indexWriter.AddDocument(streetDocument);
 
-                // indexWriter.Optimize();
+            // indexWriter.Optimize();
 
-                indexWriter.Commit();
+            indexWriter.Commit();
 
-                indexWriter.Dispose(true);
-            }
+            indexWriter.Dispose(true);
         }
 
         public void InsertStreets(IList<Street> streets)

@@ -87,6 +87,18 @@ Scenario: Search a street when the term is short
 	| name    | pobox |
 	| An Ufer | 86111 |
 
+Scenario: Search a street when the term is short an starts with st
+	Given in the repository is stored the street
+	| name    | pobox |
+	| St.-Michael-Weg | 86476 |
+	And the user enters the following street
+	| name | pobox |
+	| st | 86476 |
+	When the portal search for streets
+	Then the user should have the following autocomplete suggestions
+	| name    | pobox |
+	| St.-Michael-Weg | 86476 |
+
 Scenario: Search a street has a one word when the term is short
 	Given in the repository is stored the street
 	| name    | pobox |

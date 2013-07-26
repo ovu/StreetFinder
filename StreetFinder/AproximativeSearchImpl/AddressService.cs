@@ -11,6 +11,8 @@ namespace AproximativeSearchImpl
         private readonly StreetRepositoryLucene streetRepository;
         private bool _repositoryExists = false;
 
+        private object _objectLock = new object();
+
         public AddressService()
         {
             streetRepository = new StreetRepositoryLucene();    
@@ -43,15 +45,18 @@ namespace AproximativeSearchImpl
                 throw new ArgumentException("The parameter streetname cannot be null nor empty");
             }
 
-            var street = new Street {Name = streetName, Pobox = zip};
-
-            if (_repositoryExists == false && !streetRepository.ExistStreetRepository())
+            lock (_objectLock)
             {
-                streetRepository.CreateStreetRepository();
-                _repositoryExists = true;
-            }
+                var street = new Street { Name = streetName, Pobox = zip };
 
-            streetRepository.InsertStreet(street);
+                if (_repositoryExists == false && !streetRepository.ExistStreetRepository())
+                {
+                    streetRepository.CreateStreetRepository();
+                    _repositoryExists = true;
+                }
+
+                streetRepository.InsertStreet(street);                
+            }
         }
 
         public void Dispose()

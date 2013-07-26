@@ -13,7 +13,7 @@ namespace TestPerformance
         {
             LoadAllStreets();
 
-           //SearchForStreet("80337", "ubahn");
+            //SearchForStreet("86476", "St");
         }
 
         public static void SearchForStreet(string zipcode, string street)
