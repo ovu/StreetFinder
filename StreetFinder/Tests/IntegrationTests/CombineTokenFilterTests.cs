@@ -3,8 +3,9 @@ using FluentAssertions;
 using Lucene.Net.Util;
 using NUnit.Framework;
 using StreetFinder;
+using Tests.UnitTests;
 
-namespace Tests.UnitTests
+namespace Tests.IntegrationTests
 {
     [TestFixture]
     public class CombineTokenFilterTests
@@ -17,9 +18,8 @@ namespace Tests.UnitTests
             var listTokens = tokens.ToList();
 
             // Assert
-            listTokens.Should().Contain("erika");
-            listTokens.Should().Contain("mann");
             listTokens.Should().Contain("erikamann");
+            listTokens.Should().Contain("mann");
         }
 
         [Test]

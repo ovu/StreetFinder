@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Tokenattributes;
 
@@ -7,11 +6,11 @@ namespace StreetFinder.AbbreviationsFilter
 {
     public class AbbreviationTokenFilter: TokenFilter
     {
-        private readonly Queue<string> _abbreviationsTokenQueue = new Queue<string>();
-
         public IAbbreviationsEngine AbbreviationsEngine { get; private set; }
 
         private bool _abbreviationsWereAdded = false;
+
+        private AbbreviationTokenExpander _abbreviationsTokenExpander = new AbbreviationTokenExpander();
 
         public AbbreviationTokenFilter(TokenStream input, IAbbreviationsEngine abbreviationsEngine)
             : base(input)
@@ -24,46 +23,31 @@ namespace StreetFinder.AbbreviationsFilter
 
         public override bool IncrementToken()
         {
-            var attribute = input.GetAttribute<ITermAttribute>();
-            if (_abbreviationsTokenQueue.Count > 0)
+            if (_abbreviationsWereAdded && _abbreviationsTokenExpander.NextElement())
             {
                 var newAttribute = input.AddAttribute<ITermAttribute>();
-                newAttribute.SetTermBuffer(_abbreviationsTokenQueue.Dequeue());
+                newAttribute.SetTermBuffer(_abbreviationsTokenExpander.CurrentElement());
                 return true;
             }
 
-            if (attribute.Term.EndsWith("str"))
+            while (input.IncrementToken() && !_abbreviationsWereAdded)
             {
-                List<string> abbreviations;
-                if (AbbreviationsEngine.HasAbbreviationsOrIsAbbreviation("str", out abbreviations))
-                {
-                    _abbreviationsTokenQueue.Enqueue(attribute.Term);
-
-                    foreach (var abbreviation in abbreviations)
-                    {
-                        _abbreviationsTokenQueue.Enqueue(abbreviation);
-                    }
-                }
-
-                return true;
+                var attribute = input.GetAttribute<ITermAttribute>();
+                _abbreviationsTokenExpander.Add(attribute.Term);
             }
-            
-            if (!_abbreviationsWereAdded && !attribute.Term.Equals(""))
-            {
-                List<string> abbreviations;
-                if (AbbreviationsEngine.HasAbbreviationsOrIsAbbreviation(attribute.Term, out abbreviations))
-                {
-                    _abbreviationsTokenQueue.Enqueue(attribute.Term);
 
-                    foreach (var abbreviation in abbreviations)
-                    {
-                        _abbreviationsTokenQueue.Enqueue(abbreviation);
-                    }
-                }
+            if (_abbreviationsTokenExpander.NextElement())
+            {
+                var newAttribute = input.AddAttribute<ITermAttribute>();
+
+                newAttribute.SetTermBuffer(_abbreviationsTokenExpander.CurrentElement());
+
                 _abbreviationsWereAdded = true;
+
+                return true;
             }
 
-            return input.IncrementToken();
+            return false;
         }
     }
 }

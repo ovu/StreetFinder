@@ -70,9 +70,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TermSearch.feature</DependentUpon>
     </Compile>
-    <Compile Include="UnitTests\CombineTokenFilterTests.cs" />
-    <Compile Include="UnitTests\StreetAnalyzerAbbreviationFilterTests.cs" />
+    <Compile Include="UnitTests\AbbreviationTokenExpanderTests.cs" />
+    <Compile Include="IntegrationTests\CombineTokenFilterTests.cs" />
+    <Compile Include="IntegrationTests\StreetAnalyzerAbbreviationFilterTests.cs" />
     <Compile Include="UnitTests\AnalyzerTestHelper.cs" />
+    <Compile Include="UnitTests\StringTokenCombinerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -2,8 +2,12 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AproximativeSearchImpl;
+using FluentAssertions;
+using StreetFinder;
+using Tests.UnitTests;
 
 namespace TestPerformance
 {
@@ -11,7 +15,18 @@ namespace TestPerformance
     {
         static void Main(string[] args)
         {
-            LoadAllStreets();
+
+            var tokens = AnalyzerTestHelper.TokensFromAnalysis(new StreetAnalyzer(Lucene.Net.Util.Version.LUCENE_30), "Doktor.-Schweninger-Str.");
+            var listTokens = tokens.ToList();
+
+            // Assert
+            foreach (var token in listTokens)
+            {
+                Console.WriteLine(token);
+            }
+
+            Console.ReadKey();
+            //LoadAllStreets();
 
             //SearchForStreet("86476", "St");
         }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Lucene.Net.Analysis;
+﻿using Lucene.Net.Analysis;
 
 using Lucene.Net.Analysis.Tokenattributes;
 
@@ -8,27 +6,21 @@ namespace StreetFinder.CombineFilter
 {
     public class CombineTokenFilter : TokenFilter
     {
-        private string lastTerm;
-
-        private readonly Queue<string> _combinedTokensQueue = new Queue<string>();
-
         private bool addinCombinedTokens = false;
+
+        private StreetTokenCombiner _streetTokenCombiner = new StreetTokenCombiner();
 
         public CombineTokenFilter(TokenStream input) : base(input)
         {
-            lastTerm = "";
         }
 
         public override bool IncrementToken()
         {
-            if (_combinedTokensQueue.Count > 0)
+            if (addinCombinedTokens && _streetTokenCombiner.NextElement())
             {
                 var newAttribute = input.AddAttribute<ITermAttribute>();
 
-                newAttribute.SetTermBuffer(_combinedTokensQueue.Dequeue());
-
-                addinCombinedTokens = true;
-                lastTerm = "";
+                newAttribute.SetTermBuffer(_streetTokenCombiner.CurrentElement());
 
                 return true;
             }
@@ -36,37 +28,16 @@ namespace StreetFinder.CombineFilter
             while (input.IncrementToken() && !addinCombinedTokens)
             {
                 var attribute = input.GetAttribute<ITermAttribute>();
-
-                if (attribute.Term.Equals("dr") || attribute.Term.Equals("prof") || attribute.Term.Equals("st"))
-                {
-                    _combinedTokensQueue.Enqueue(attribute.Term);
-
-                    lastTerm = "";
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(lastTerm))
-                    {
-                        _combinedTokensQueue.Enqueue(lastTerm + attribute.Term);
-                    }
-
-                    lastTerm = attribute.Term;
-                }
+                _streetTokenCombiner.Add(attribute.Term);
             }
 
-            if (!string.IsNullOrEmpty(lastTerm))
-            {
-                _combinedTokensQueue.Enqueue(lastTerm);
-            }
-
-            if (_combinedTokensQueue.Count > 0)
+            if (_streetTokenCombiner.NextElement())
             {
                 var newAttribute = input.AddAttribute<ITermAttribute>();
 
-                newAttribute.SetTermBuffer(_combinedTokensQueue.Dequeue());
+                newAttribute.SetTermBuffer(_streetTokenCombiner.CurrentElement());
 
                 addinCombinedTokens = true;
-                lastTerm = "";
 
                 return true;
             }

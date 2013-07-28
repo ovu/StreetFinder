@@ -38,14 +38,14 @@ Scenario: Search a street when the Pobox starts with 0
 	Given in the repository is stored the street
 	| name              | pobox |
 	| S-Bahnhof Isartor | 86161 |
-	| Street pobox 0    | 06161 |
+	| Street pobox0    | 06161 |
 	And the user enters the following street
 	| name   | pobox |
-	| Street pobox 0 | 06161 |
+	| Street pobox0 | 06161 |
 	When the portal search for streets
 	Then the user should have the following autocomplete suggestions
 	| name           | pobox |
-	| Street pobox 0 | 06161 |
+	| Street pobox0 | 06161 |
 
 # Numbers in the name of the street
 Scenario: Search a street when the name contains numbers

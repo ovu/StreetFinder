@@ -36,6 +36,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\ApproximativeSearch.dll</HintPath>
     </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.2.0.1\lib\net40\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Lucene\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +65,14 @@
     <ProjectReference Include="..\AproximativeSearchImpl\AproximativeSearchImpl.csproj">
       <Project>{c2c98214-33ea-4329-a128-0e5bbf7dbafa}</Project>
       <Name>AproximativeSearchImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StreetFinder\StreetFinder.csproj">
+      <Project>{7218934a-87b3-4114-a3c8-3cce1d86159c}</Project>
+      <Name>StreetFinder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tests\Tests.csproj">
+      <Project>{121d3126-d680-4c0a-93ba-0a02bbf6582c}</Project>
+      <Name>Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,10 +1,11 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using Lucene.Net.Util;
 using NUnit.Framework;
 using StreetFinder;
-using System.Linq;
+using Tests.UnitTests;
 
-namespace Tests.UnitTests
+namespace Tests.IntegrationTests
 {
     [TestFixture]
     public class StreetAnalyzerAbbreviationFilterTests
