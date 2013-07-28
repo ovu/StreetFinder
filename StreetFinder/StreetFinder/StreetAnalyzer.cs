@@ -32,7 +32,7 @@ namespace StreetFinder
 
             var synonymTokens = new AbbreviationTokenFilter(combineResult, new AbbreviationsEngine());
 
-            var edgeTokens = new EdgeNGramTokenFilter(synonymTokens, Side.FRONT, 2, 30);
+            var edgeTokens = new EdgeNGramTokenFilter(synonymTokens, Side.FRONT, 1, 30);
 
             return edgeTokens;
         }

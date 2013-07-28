@@ -8,28 +8,32 @@ namespace AproximativeSearchImpl
 {
     public class AddressService: IAddressService
     {
-        private readonly StreetRepositoryLucene streetRepository;
+        private readonly StreetRepositoryLucene _streetRepository;
         private bool _repositoryExists = false;
 
-        private object _objectLock = new object();
+        private readonly object _objectLock = new object();
 
         public AddressService()
         {
-            streetRepository = new StreetRepositoryLucene();    
+            var repositoryName = Guid.NewGuid().ToString();
+            _streetRepository = new StreetRepositoryLucene(repositoryName);    
         }
 
         public IEnumerable<string> Search(string zip, string street)
         {
-            var searchResults = streetRepository.SearchForStreets(zip, street);
+            lock (_objectLock)
+            {
+                var searchResults = _streetRepository.SearchForStreets(zip, street);
 
-            return searchResults.Select(searchResult => searchResult.Name);
+                return searchResults.Select(searchResult => searchResult.Name);                
+            }
         }
 
         public void Insert(string zip, ISet<string> streetNames)
         {
-            foreach (var streetName in streetNames)
+            lock (_objectLock)
             {
-                Insert(zip, streetName);
+                _streetRepository.InsertStreets(zip, streetNames);                
             }
         }
 
@@ -49,18 +53,19 @@ namespace AproximativeSearchImpl
             {
                 var street = new Street { Name = streetName, Pobox = zip };
 
-                if (_repositoryExists == false && !streetRepository.ExistStreetRepository())
+                if (_repositoryExists == false && !_streetRepository.ExistStreetRepository())
                 {
-                    streetRepository.CreateStreetRepository();
+                    _streetRepository.CreateStreetRepository();
                     _repositoryExists = true;
                 }
 
-                streetRepository.InsertStreet(street);                
+                _streetRepository.InsertStreet(street);                
             }
         }
 
         public void Dispose()
         {
+            _streetRepository.DeleteStreetRepository();
         }
     }
 }

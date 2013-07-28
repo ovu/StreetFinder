@@ -17,7 +17,8 @@ namespace StreetFinder
 {
     public class StreetRepositoryLucene: IStreetSearchRepository
     {
-        private string _luceneEdgeGramIndexDir = "LuceneEdgegramIndex";
+        private readonly string _luceneEdgeGramIndexDir = string.Empty;
+        private const string LuceneIndeDefaultDir = "LuceneEdgegramIndex";
 
         private string StreetsEdgeGramIndexDirectory
         {
@@ -25,6 +26,16 @@ namespace StreetFinder
             {
                 return Environment.CurrentDirectory + "\\" + _luceneEdgeGramIndexDir;
             }
+        }
+
+        public StreetRepositoryLucene()
+        {
+            _luceneEdgeGramIndexDir = LuceneIndeDefaultDir;
+        }
+
+        public StreetRepositoryLucene(string directoryName)
+        {
+            _luceneEdgeGramIndexDir = directoryName;
         }
 
         public void CreateStreetRepository()
@@ -165,9 +176,29 @@ namespace StreetFinder
             indexWriter.Dispose(true);
         }
 
-        public void InsertStreets(IList<Street> streets)
+        public void InsertStreets(string zipCode, ISet<string> streets)
         {
-            throw new NotImplementedException();
+            var edgeDirectory = FSDirectory.Open(new DirectoryInfo(StreetsEdgeGramIndexDirectory));
+            var streetEdgeGramAnalyzer = new StreetAnalyzer(Version.LUCENE_30);
+            var indexWriter = new IndexWriter(edgeDirectory, streetEdgeGramAnalyzer, false, IndexWriter.MaxFieldLength.LIMITED);
+            foreach (var streetName in streets)
+            {
+                var streetDocument = new Document();
+
+                streetDocument.Add(new Field("Name", streetName, Field.Store.YES, Field.Index.ANALYZED));
+                streetDocument.Add(new Field("Pobox", zipCode, Field.Store.YES, Field.Index.NOT_ANALYZED));
+
+                // Write edgegram            
+
+                indexWriter.AddDocument(streetDocument);
+            }
+
+            indexWriter.Optimize();
+
+            indexWriter.Commit();
+
+            indexWriter.Dispose(true);
+            edgeDirectory.Dispose();
         }
     }
 }

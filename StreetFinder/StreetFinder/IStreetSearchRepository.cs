@@ -14,6 +14,6 @@ namespace StreetFinder
 
         void InsertStreet(Street street);
 
-        void InsertStreets(IList<Street> streets);
+        void InsertStreets(string zipCode, ISet<string> streets);
     }
 }
