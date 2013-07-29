@@ -31,8 +31,24 @@ namespace AproximativeSearchImpl
 
         public void Insert(string zip, ISet<string> streetNames)
         {
+            if (string.IsNullOrEmpty(zip))
+            {
+                throw new ArgumentException("The parameter zip cannot be null nor empty");
+            }
+
+            if (streetNames == null)
+            {
+                throw new ArgumentException("The parameter streetNames cannot be null");
+            }
+
             lock (_objectLock)
             {
+                if (_repositoryExists == false && !_streetRepository.ExistStreetRepository())
+                {
+                    _streetRepository.CreateStreetRepository();
+                    _repositoryExists = true;
+                }
+
                 _streetRepository.InsertStreets(zip, streetNames);                
             }
         }
