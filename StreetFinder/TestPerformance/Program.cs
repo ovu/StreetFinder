@@ -15,11 +15,11 @@ namespace TestPerformance
     {
         static void Main(string[] args)
         {
-            LoadStreetsInBlock();
+            //LoadStreetsInBlock();
 
             //LoadAllStreets();
 
-            //SearchForStreet("81677", "stra");
+            SearchForStreet("89619", "Nisch");
         }
 
         public static void SearchForStreet(string zipcode, string street)

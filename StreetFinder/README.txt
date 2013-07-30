@@ -2,10 +2,12 @@ Important Classes
 =================
 
 + AproximativeSearchImpl.AddressService
-  It is a thread safe implementation of the IAddressService.
+  It is a thread safe implementation of the IAddressService. It uses the class StreetRepositoryLucene for inserting and searching for documents
+in the lucene index.
 
 + StreetFinder.StreetRepositoryLucene
   It is a lucene wrapper that allows for indexing street documents and offers a method for searching for streets aproximatively.
+It uses the StreetAnalyzer for analyzing the street before they are indexed.
 
 + StreetFinder.StreetAnalyzer
   It is the implementation of a Lucene analyzer that it used for analyzing street documents. It generates the tokens for the reverted index
