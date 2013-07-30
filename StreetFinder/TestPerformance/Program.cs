@@ -6,6 +6,7 @@ using System.IO;
 using System.Resources;
 using System.Threading.Tasks;
 using AproximativeSearchImpl;
+using Lucene.Net.Support;
 using NUnit.Framework;
 
 namespace TestPerformance
@@ -14,11 +15,11 @@ namespace TestPerformance
     {
         static void Main(string[] args)
         {
-            //LoadStreetsInBlock();
+            LoadStreetsInBlock();
 
             //LoadAllStreets();
 
-            SearchForStreet("81677", "stra");
+            //SearchForStreet("81677", "stra");
         }
 
         public static void SearchForStreet(string zipcode, string street)
@@ -82,9 +83,22 @@ namespace TestPerformance
 
             var count = 0;
 
-            var collection = new[] { "86159", "81541", "81541", "81543", "81547", "81677", "81739", "83527" };
+            // Get list of all PObox
+            var poBoxes = new List<string>();
+            var allLines = File.ReadLines(@"c:\temp\TestStreets.csv", System.Text.Encoding.Default);
+            var lastPoBox = string.Empty;
+            foreach (var line in allLines)
+            {
+                var tokens = line.Split(';');
+                if (!tokens[0].Equals(lastPoBox))
+                {
+                    poBoxes.Add(tokens[0]);
+                    lastPoBox = tokens[0];
+                }
+            }
 
-            Parallel.ForEach(collection, (c, state) =>
+
+            Parallel.ForEach(poBoxes, (c, state) =>
             {
                 Console.WriteLine("Indexing " + c);
                 var lines = File.ReadLines(@"c:\temp\TestStreets.csv", System.Text.Encoding.Default);
@@ -92,7 +106,7 @@ namespace TestPerformance
                 var wasFound = false;
                 foreach (var line in lines)
                 {
-                   var tokens = line.Split(',');
+                   var tokens = line.Split(';');
                     if (tokens[0].Equals(c))
                     {
                         streetNames.Add(tokens[1]);
