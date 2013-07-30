@@ -20,6 +20,9 @@ namespace StreetFinder
         private readonly string _luceneEdgeGramIndexDir = string.Empty;
         private const string LuceneIndeDefaultDir = "LuceneEdgegramIndex";
 
+        private const int MaxDocumentsBeforeIndexing = 1000;
+        private int _insertedDocuments;
+
         private string StreetsEdgeGramIndexDirectory
         {
             get
@@ -28,14 +31,14 @@ namespace StreetFinder
             }
         }
 
-        public StreetRepositoryLucene()
+        public StreetRepositoryLucene(): this(LuceneIndeDefaultDir)
         {
-            _luceneEdgeGramIndexDir = LuceneIndeDefaultDir;
         }
 
         public StreetRepositoryLucene(string directoryName)
         {
             _luceneEdgeGramIndexDir = directoryName;
+            _insertedDocuments = 0;
         }
 
         public void CreateStreetRepository()
@@ -169,7 +172,14 @@ namespace StreetFinder
                 
             indexWriter.AddDocument(streetDocument);
 
-            // indexWriter.Optimize();
+            _insertedDocuments++;
+
+            if (_insertedDocuments == MaxDocumentsBeforeIndexing)
+            {
+                indexWriter.Optimize();
+
+                _insertedDocuments = 0;
+            }            
 
             indexWriter.Commit();
 

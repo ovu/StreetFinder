@@ -16,7 +16,8 @@ namespace AproximativeSearchImpl
         public AddressService()
         {
             var repositoryName = Guid.NewGuid().ToString();
-            _streetRepository = new StreetRepositoryLucene(repositoryName);    
+            _streetRepository = new StreetRepositoryLucene(repositoryName);
+            _repositoryExists = false;
         }
 
         public IEnumerable<string> Search(string zip, string street)
