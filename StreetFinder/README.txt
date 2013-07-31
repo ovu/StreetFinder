@@ -5,19 +5,19 @@ Important Classes
   It is a thread safe implementation of the IAddressService. It uses the class StreetRepositoryLucene for inserting and searching for documents
 in the lucene index.
   The result of the Search method is a list of street names prioritized by hit. The street name can contain several tokens that will be used for 
-searching the streets aproximtively. 
+searching the streets aproximatively. 
 
 + StreetFinder.StreetRepositoryLucene
-  It is a lucene wrapper that allows for indexing street documents and offers a method for searching for streets aproximatively.
-It uses the StreetAnalyzer for analyzing the street name for indexing. The street analyzer produces tokens that will be stored used for indexing and searching streets. 
+  It is a lucene wrapper that allows for inserting street documents in an index and offers a method for searching for streets aproximatively.
+It uses the StreetAnalyzer for analyzing the street name before indexing. The street analyzer produces tokens that will be stored in an inverted index. 
 
 + StreetFinder.StreetAnalyzer
-  It is the implementation of a Lucene analyzer that it used for analyzing street documents. It generates the tokens for the reverted index
-that are later indexed by the StreetRepository. The generated tokens are Edge-Ngram, abbreviations tokens and combined tokens.
+  It is the implementation of a Lucene analyzer that it used for analyzing street documents. It generates the tokens which
+are later indexed by the StreetRepository. The generated tokens are Edge-Ngram, abbreviations tokens and combined tokens. The tokens contain lowered case chars and numbers but not symbols.
 
 + StreetFinder.CombineFilter.CombineTokenFilter
   It is a Lucene filter that combines tokens. Combined tokens are necessary when searching for street names without spaces between them.
-  E.g. The tokens "Erika" "Mann" will be combined in "Erikamann" and "Mann". It takes into account that abbreviations at the beginning of a street name cannot be combined. 
+  E.g. The tokens "Erika" "Mann" will be combined into "Erikamann" and "Mann". It takes into account that abbreviations at the beginning of a street name cannot be combined. 
 
 + StreetFinder.AbbreviationsFilter.AbbreviationTokenFilter
   It is a Lucene filter that uses an abbreviation engine to add abbreviations or introduce the text that was abbreviated to the list of tokens that will be indexed.
