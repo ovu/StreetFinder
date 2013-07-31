@@ -17,9 +17,9 @@ namespace TestPerformance
         {
             //LoadStreetsInBlock();
 
-            //LoadAllStreets();
+            LoadAllStreets();
 
-            SearchForStreet("89619", "Nisch");
+            //SearchForStreet("89619", "Nisch");
         }
 
         public static void SearchForStreet(string zipcode, string street)
@@ -48,14 +48,14 @@ namespace TestPerformance
             var count = 0;
             var lines = File.ReadLines(@"c:\temp\TestStreets.csv", System.Text.Encoding.Default);
 
-            var collection = new BlockingCollection<string>();
+            var collection = new List<string>();
 
             foreach (var line in lines)
             {
                 collection.Add(line);
             }
 
-            Parallel.ForEach(collection.GetConsumingEnumerable(), c =>
+            Parallel.ForEach(collection, c =>
                 {
                     var tokens = c.Split(';');
                     addressService.Insert(tokens[0], tokens[1]);
