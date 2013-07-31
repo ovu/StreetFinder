@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Resources;
 using System.Threading.Tasks;
 using AproximativeSearchImpl;
-using Lucene.Net.Support;
-using NUnit.Framework;
 
 namespace TestPerformance
 {
@@ -15,9 +11,9 @@ namespace TestPerformance
     {
         static void Main(string[] args)
         {
-            //LoadStreetsInBlock();
+            LoadStreetsInBlock();
 
-            LoadAllStreets();
+            //LoadAllStreets();
 
             //SearchForStreet("89619", "Nisch");
         }
